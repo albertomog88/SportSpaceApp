@@ -22,4 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void toInicio(View v){
+        startActivity(new Intent(this, Inicio.class));
+
+
+    }
 }

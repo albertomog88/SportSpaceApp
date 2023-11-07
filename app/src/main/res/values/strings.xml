@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">SportSpaceApp</string>
-    <string name="txtInicio">Inicio de Sesión</string>
+    //Vista Login
+    <string name="txtInicioSesion">Inicio de Sesión</string>
     <string name="editMail">Usuario</string>
     <string name="editPass">Contraseña</string>
     <string name="btnInicio">Inicio</string>
     <string name="btnRegistro">Registro</string>
-
+    //Vista Registro
     <string name="txtRegistro">Registro</string>
+
+
+    //Vista Inico
+    <string name="txtIncio">Inicio</string>
+
 </resources>
