@@ -9,14 +9,18 @@ import androidx.annotation.Nullable;
 
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
-    //private DataBase db;
-    public AdminSQLiteOpenHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+
+    public static final String DATABASE_NAME = "sportspaceapp.sql";
+    public static final int DATABASE_VERSION = 1;
+
+
+    public AdminSQLiteOpenHelper(@Nullable Context context,  @Nullable SQLiteDatabase.CursorFactory factory) {
+        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table usuarios(codigo int primary key autoincrement, nombre text, apellido1 text, apellido2 text, mail text, fechNac text, password text)");
+        db.execSQL("create table usuarios(codigo INTEGER primary key autoincrement, nombre text, apellido1 text, apellido2 text, mail text, fechNac text, password text)");
 
     }
 

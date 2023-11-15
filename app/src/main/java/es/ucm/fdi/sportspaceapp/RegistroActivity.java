@@ -15,6 +15,7 @@ public class RegistroActivity extends AppCompatActivity {
 
     private EditText et_nombre, et_ape1, et_ape2, et_fechNac, et_correo, et_passw;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +30,8 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     public void Registrar(View v){
-        Toast.makeText(this, "Boton registro", Toast.LENGTH_SHORT).show();
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "sportspaceapp", null, 1);
+
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, null);
         SQLiteDatabase database = admin.getWritableDatabase();
 
 
@@ -55,9 +56,9 @@ public class RegistroActivity extends AppCompatActivity {
             database.insert("usuarios", null, registro);
             database.close();
             this.Vaciar();
-            Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Registro exitoso", Toast.LENGTH_LONG).show();
         }else{
-            Toast.makeText(this, "Debes llenar todos los campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Debes llenar todos los campos", Toast.LENGTH_LONG).show();
         }
     }
 
