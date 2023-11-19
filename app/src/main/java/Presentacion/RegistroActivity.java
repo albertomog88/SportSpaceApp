@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import Integracion.UsuarioDB;
 import Negocio.Usuario;
 import es.ucm.fdi.sportspaceapp.R;
 
@@ -41,15 +42,20 @@ public class RegistroActivity extends AppCompatActivity {
         String pass = et_passw.getText().toString();
         Usuario u = new Usuario(nombre, ape1,  email, pass, fecha);
 
-        if(!u.existe()){
-            Log.println(Log.DEBUG, "Existe Usuario", "Sí");
-            u.guardar();
-            this.Vaciar();
-            Toast.makeText(this, "Registro exitoso", Toast.LENGTH_LONG).show();
-        }else{
-            Log.println(Log.DEBUG, "Existe Usuario", "No");
-            Toast.makeText(this, "Debes llenar todos los campos", Toast.LENGTH_LONG).show();
-        }
+        u.existe(new UsuarioDB.Callback() {
+            @Override
+            public void onCallback(boolean exists) {
+                if (!exists) {
+                    // Lógica para manejar cuando el usuario no existe
+                    u.guardar();
+                    Vaciar();
+                    Toast.makeText(RegistroActivity.this, "Registro exitoso", Toast.LENGTH_LONG).show();
+                } else {
+                    // Lógica para manejar cuando el usuario ya existe
+                    Toast.makeText(RegistroActivity.this, "El usuario ya existe", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void Vaciar(){

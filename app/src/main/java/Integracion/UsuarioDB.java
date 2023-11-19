@@ -1,4 +1,5 @@
 package Integracion;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -30,11 +31,19 @@ public class UsuarioDB {
         return true;
     }
 
-    public boolean existe(Usuario u){
+    public void existe(Usuario u, Callback callback){
         String id = u.getEmail();
         DocumentReference docRef = SingletonDataBase.getInstance().getDB().collection(myCol).document(id);
-        DocumentSnapshot doc = docRef.get().getResult();
-        return doc.exists();
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                callback.onCallback(documentSnapshot.exists());
+            }
+        });
+    }
+
+    public interface Callback {
+        void onCallback(boolean exists);
     }
 
 }

@@ -23,7 +23,9 @@ public class Usuario {
     public boolean guardar(){
         return uDB.guardar(this);
     }
-    public boolean existe(){return uDB.existe(this);}
+    public void existe(UsuarioDB.Callback callback){
+        uDB.existe(this, callback);
+    }
 
     public String getNombre() {
         return nombre;
