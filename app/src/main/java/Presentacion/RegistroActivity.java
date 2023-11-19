@@ -46,12 +46,18 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onCallback(boolean exists) {
                 if (!exists) {
-                    // Lógica para manejar cuando el usuario no existe
+                    // Usuario no existe, proceder con el registro
                     u.guardar();
-                    Vaciar();
                     Toast.makeText(RegistroActivity.this, "Registro exitoso", Toast.LENGTH_LONG).show();
+
+                    // Navegar a la vista de inicio
+                    Intent intent = new Intent(RegistroActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish(); // Opcional, para finalizar esta actividad y no volver a ella al presionar 'Atrás'
+
                 } else {
-                    // Lógica para manejar cuando el usuario ya existe
+                    // Usuario ya existe, limpiar campos y mostrar mensaje
+                    Vaciar();
                     Toast.makeText(RegistroActivity.this, "El usuario ya existe", Toast.LENGTH_LONG).show();
                 }
             }
@@ -59,12 +65,7 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     private void Vaciar(){
-        et_nombre.setText("");
-        et_ape1.setText("");
-        et_ape2.setText("");
-        et_fechNac.setText("");
         et_correo.setText("");
-        et_passw.setText("");
     }
 
     public void toInicio(View v){
