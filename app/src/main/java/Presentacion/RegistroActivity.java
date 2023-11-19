@@ -1,14 +1,10 @@
 package Presentacion;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import Integracion.UsuarioDB;
 import Negocio.Usuario;
 import es.ucm.fdi.sportspaceapp.R;
@@ -40,22 +36,26 @@ public class RegistroActivity extends AppCompatActivity {
         String fecha = et_fechNac.getText().toString();
         String email = et_correo.getText().toString();
         String pass = et_passw.getText().toString();
-        Usuario u = new Usuario(nombre, ape1,  email, pass, fecha);
-
-        u.existe(new UsuarioDB.Callback() {
-            @Override
-            public void onCallback(boolean exists) {
-                if (!exists) {
-                    // Lógica para manejar cuando el usuario no existe
-                    u.guardar();
-                    Vaciar();
-                    Toast.makeText(RegistroActivity.this, "Registro exitoso", Toast.LENGTH_LONG).show();
-                } else {
-                    // Lógica para manejar cuando el usuario ya existe
-                    Toast.makeText(RegistroActivity.this, "El usuario ya existe", Toast.LENGTH_LONG).show();
+        if(nombre.isEmpty() || ape1.isEmpty() || ape2.isEmpty() || fecha.isEmpty() || email.isEmpty() || pass.isEmpty()) {
+            Toast.makeText(RegistroActivity.this, "No dejes datos vacios", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Usuario u = new Usuario(nombre, ape1,  email, pass, fecha);
+            u.existe(new UsuarioDB.Callback() {
+                @Override
+                public void onCallback(boolean exists) {
+                    if (!exists) {
+                        // Lógica para manejar cuando el usuario no existe
+                        u.guardar();
+                        Vaciar();
+                        Toast.makeText(RegistroActivity.this, "Registro exitoso", Toast.LENGTH_LONG).show();
+                    } else {
+                        // Lógica para manejar cuando el usuario ya existe
+                        Toast.makeText(RegistroActivity.this, "El usuario ya existe", Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     private void Vaciar(){
@@ -68,7 +68,7 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     public void toInicio(View v){
-        startActivity(new Intent(this, Inicio.class));
+        startActivity(new Intent(this, MainActivity.class));
 
     }
 }

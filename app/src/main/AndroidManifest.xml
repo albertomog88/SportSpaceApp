@@ -13,13 +13,16 @@
         android:theme="@style/Theme.SportSpaceApp"
         tools:targetApi="31">
         <activity
-            android:name="Presentacion.Inicio"
-            android:exported="false" />
-        <activity
             android:name="Presentacion.RegistroActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name="Presentacion.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name="Presentacion.Inicio"
+            android:exported="true" />
+        <activity
+            android:name="Presentacion.InicioSesionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
