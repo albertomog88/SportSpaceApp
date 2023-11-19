@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "122972965969",
+    "project_id": "sportspace-89d13",
+    "storage_bucket": "sportspace-89d13.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122972965969:android:e20f563619d113574cfc70",
+        "android_client_info": {
+          "package_name": "es.ucm.fdi.sportspaceapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA51R8iacNqJaL8HrAzW6keS5O7bod2V64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

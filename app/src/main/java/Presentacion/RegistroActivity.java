@@ -1,15 +1,16 @@
-package es.ucm.fdi.sportspaceapp;
+package Presentacion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import Negocio.Usuario;
+import es.ucm.fdi.sportspaceapp.R;
 
 public class RegistroActivity extends AppCompatActivity {
 
@@ -31,33 +32,22 @@ public class RegistroActivity extends AppCompatActivity {
 
     public void Registrar(View v){
 
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, null);
-        SQLiteDatabase database = admin.getWritableDatabase();
-
-
-
         String nombre = et_nombre.getText().toString();
         String ape1 = et_ape1.getText().toString();
         String ape2 = et_ape2.getText().toString();
-        String fechNac = et_fechNac.getText().toString();
-        String correo = et_correo.getText().toString();
-        String passw = et_passw.getText().toString();
+        ape1 += ape2;
+        String fecha = et_fechNac.getText().toString();
+        String email = et_correo.getText().toString();
+        String pass = et_passw.getText().toString();
+        Usuario u = new Usuario(nombre, ape1,  email, pass, fecha);
 
-        if(!nombre.isEmpty() && !ape1.isEmpty() && !ape2.isEmpty() && !fechNac.isEmpty() && !correo.isEmpty() && !passw.isEmpty()){
-            ContentValues registro = new ContentValues();
-
-            registro.put("nombre", nombre);
-            registro.put("apellido1", ape1);
-            registro.put("apellido2", ape2);
-            registro.put("mail", correo);
-            registro.put("fechNac", fechNac);
-            registro.put("password", passw);
-
-            database.insert("usuarios", null, registro);
-            database.close();
+        if(!u.existe()){
+            Log.println(Log.DEBUG, "Existe Usuario", "Sí");
+            u.guardar();
             this.Vaciar();
             Toast.makeText(this, "Registro exitoso", Toast.LENGTH_LONG).show();
         }else{
+            Log.println(Log.DEBUG, "Existe Usuario", "No");
             Toast.makeText(this, "Debes llenar todos los campos", Toast.LENGTH_LONG).show();
         }
     }
@@ -73,7 +63,6 @@ public class RegistroActivity extends AppCompatActivity {
 
     public void toInicio(View v){
         startActivity(new Intent(this, Inicio.class));
-
 
     }
 }

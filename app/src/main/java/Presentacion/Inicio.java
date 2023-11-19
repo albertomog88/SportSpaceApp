@@ -1,8 +1,10 @@
-package es.ucm.fdi.sportspaceapp;
+package Presentacion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import es.ucm.fdi.sportspaceapp.R;
 
 public class Inicio extends AppCompatActivity {
 
