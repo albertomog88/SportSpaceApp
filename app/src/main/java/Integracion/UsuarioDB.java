@@ -2,18 +2,16 @@ package Integracion;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-
 import java.util.HashMap;
-
 import Negocio.Usuario;
 
 public class UsuarioDB {
     private String myCol = "Usuarios";
+    private String myColUsers = "users";
     private String myNombre = "nombre";
     private String myApellidos = "apellidos";
     private String myEmail = "email";
-    private String myPass = "pass";
+    private String myPass = "password";
     private String myFecha = "fechaNacimiento";
 
     public boolean guardar(Usuario u){
@@ -27,6 +25,14 @@ public class UsuarioDB {
                 put(myFecha, u.getFecha());
             }}
         );
+
+        //Intento de añadir a los usuarios tmb en la tabla de users para q puedan iniciar sesion
+        /*SingletonDataBase.getInstance().getDB().collection(myColUsers).document(id).set(
+            new HashMap<String, Object>() {{
+                put(myEmail, u.getEmail());
+                put(myPass, u.getPass());
+            }}
+        );*/
 
         return true;
     }

@@ -40,6 +40,7 @@ public class InicioSesionActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
+                        //Si Inicia Sesion Correctamente le lleva al MainActivity
                         finish();
                         startActivity(new Intent(InicioSesionActivity.this, MainActivity.class));
                         Toast.makeText(InicioSesionActivity.this, "Inicio de sesion exitoso", Toast.LENGTH_SHORT).show();
@@ -59,19 +60,19 @@ public class InicioSesionActivity extends AppCompatActivity {
     }
 
     public void toRegistro(View v){
+        finish();
         startActivity(new Intent(this, RegistroActivity.class));
     }
 
     //Comprueba si has iniciado sesion hace poco y te mete directamente en la aplicacion
-    /*@Override
     protected void onStart() {
         super.onStart();
         FirebaseUser fu = auth.getCurrentUser();
         if (fu != null){
-            startActivity(new Intent(InicioSesionActivity.this, MainActivity.class));
             finish();
+            startActivity(new Intent(InicioSesionActivity.this, MainActivity.class));
         }
-    }*/
+    }
 }
 
 
