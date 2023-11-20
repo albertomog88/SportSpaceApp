@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Estilo base para BottomNavigationView -->
+    <style name="BottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemIconSize">32dp</item> <!-- Tamaño de los íconos -->
+        <item name="itemTextAppearanceActive">@style/BottomNavigationViewActiveTextAppearance</item>
+        <item name="itemTextAppearanceInactive">@style/BottomNavigationViewInactiveTextAppearance</item>
+    </style>
+
+    <!-- Apariencia del texto para elementos activos en la BottomNavigationView -->
+    <style name="BottomNavigationViewActiveTextAppearance" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">14sp</item> <!-- Tamaño del texto activo -->
+        <item name="android:textColor">@color/white</item> <!-- Color del texto activo, define este color en colors.xml -->
+    </style>
+
+    <!-- Apariencia del texto para elementos inactivos en la BottomNavigationView -->
+    <style name="BottomNavigationViewInactiveTextAppearance" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">14sp</item> <!-- Tamaño del texto inactivo -->
+        <item name="android:textColor">@color/white</item> <!-- Color del texto inactivo, define este color en colors.xml -->
+    </style>
+
+</resources>

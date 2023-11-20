@@ -10,7 +10,7 @@ public class Usuario {
     private String email;
     private String pass;
     private String fecha;
-    private UsuarioDB uDB;
+    private static UsuarioDB uDB;
     public Usuario (String nombre, String apellidos, String email, String pass, String fecha){
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -25,6 +25,10 @@ public class Usuario {
     }
     public void existe(UsuarioDB.Callback callback){
         uDB.existe(this, callback);
+    }
+
+    public static void comprobarCorreContra(String email, String pass, UsuarioDB.Callback callback){
+        uDB.comprobarCorreContra(email, pass, callback);
     }
 
     public String getNombre() {

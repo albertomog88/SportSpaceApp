@@ -42,8 +42,30 @@ public class UsuarioDB {
         });
     }
 
+    public void comprobarCorreContra(String email, String pass, Callback callback){
+        String id = email;
+        DocumentReference docRef = SingletonDataBase.getInstance().getDB().collection(myCol).document(id);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    // Obtener la contraseña almacenada
+                    String storedPass = documentSnapshot.getString(myPass);
+
+                    // Comparar con la contraseña proporcionada
+                    boolean isMatch = storedPass != null && storedPass.equals(pass);
+                    callback.onCallback(isMatch);
+                } else {
+                    // El documento no existe
+                    callback.onCallback(false);
+                }
+            }
+        });
+    }
+
     public interface Callback {
         void onCallback(boolean exists);
     }
+
 
 }

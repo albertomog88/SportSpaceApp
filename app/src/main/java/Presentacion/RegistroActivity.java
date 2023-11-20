@@ -69,7 +69,7 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     public void toInicio(View v){
-        startActivity(new Intent(this, Inicio.class));
+        startActivity(new Intent(this, MainActivity.class));
 
     }
 }
