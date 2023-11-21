@@ -1,8 +1,10 @@
 package Presentacion;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -78,7 +80,6 @@ public class ReservasFragment extends Fragment {
         // Configurar el RecyclerView
         recyclerViewCentros = rootView.findViewById(R.id.recyclerViewCentros);
         recyclerViewCentros.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         // Inicializar el adaptador con una lista vacía
         listaCentros = new ArrayList<>();
         centroAdapter = new CentroAdapter(listaCentros);

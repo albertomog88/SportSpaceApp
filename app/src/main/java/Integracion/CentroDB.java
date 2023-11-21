@@ -18,8 +18,7 @@ public class CentroDB {
     public ArrayList<Centro> obtenerCentros(CentroCallback callback) {
         ArrayList<Centro> listaCentros = new ArrayList<>();
         // Consulta para obtener todos los documentos de la colección "Centros"
-        SingletonDataBase.getInstance().getDB().collection(myCol)
-                .get()
+        SingletonDataBase.getInstance().getDB().collection(myCol).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(Task<QuerySnapshot> task) {

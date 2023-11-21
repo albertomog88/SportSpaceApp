@@ -4,10 +4,26 @@
     android:layout_height="match_parent"
     tools:context="Presentacion.ReservasFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tituloReservas"
+            android:text="Centros Deportivos"
+            android:textSize="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCentros"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="40dp" />
 
 </FrameLayout>
