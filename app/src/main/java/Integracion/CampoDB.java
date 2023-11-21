@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Negocio.Campo;
+import Negocio.Centro;
 
 public class CampoDB {
     private String myCol = "Campos";
@@ -17,18 +18,17 @@ public class CampoDB {
     private String listaDisponibilidad = "listaDisponibilida";
 
     public interface Callback {
-        void onSuccess(List<Campo> campos);
+
+        void onSuccess(ArrayList<Campo> campos);
+
         void onError(Exception e);
     }
 
-    public void obtenerCamposPorIds(List<Integer> idCampos, Callback callback) {
-        List<Campo> listaCampos = new ArrayList<>();
+    public ArrayList<Campo> obtenerCampos(ArrayList<String> idCampos, Callback callback) {
+        ArrayList<Campo> listaCampos = new ArrayList<>();
 
         // Consulta para obtener los campos cuyos IDs estén en la lista
-        SingletonDataBase.getInstance().getDB().collection("Campos")
-                .whereIn("idCampo", idCampos)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        SingletonDataBase.getInstance().getDB().collection(myCol).whereIn("id", idCampos).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
@@ -43,5 +43,6 @@ public class CampoDB {
                         }
                     }
                 });
+        return (ArrayList<Campo>) listaCampos;
     }
 }

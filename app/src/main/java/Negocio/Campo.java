@@ -1,23 +1,35 @@
 package Negocio;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import Integracion.CampoDB;
+
 public class Campo {
-    private int id;
+    private String id;
     private String nombre;
     private String deporte;
     private Map<String, Map<String, Boolean>> disponibilidad;
+    private CampoDB cDB;
 
-    public Campo(int id, String nombre, String deporte, Map<String, Map<String, Boolean>> disponibilidad) {
+    public Campo(String id, String nombre, String deporte, Map<String, Map<String, Boolean>> disponibilidad) {
         this.id = id;
         this.nombre = nombre;
         this.deporte = deporte;
         this.disponibilidad = disponibilidad;
+        cDB = new CampoDB();
     }
 
+    public Campo(){
+        cDB = new CampoDB();
+    }
 
+    public ArrayList<Campo> obtenerCampos(ArrayList<String> idCampos, CampoDB.Callback callback){
+        return cDB.obtenerCampos(idCampos, callback);
+    }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -33,7 +45,7 @@ public class Campo {
         this.disponibilidad = disponibilidad;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

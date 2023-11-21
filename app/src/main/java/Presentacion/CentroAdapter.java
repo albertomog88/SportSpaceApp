@@ -1,5 +1,7 @@
 package Presentacion;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +17,11 @@ import es.ucm.fdi.sportspaceapp.R;
 
 public class CentroAdapter extends RecyclerView.Adapter<CentroAdapter.CentroViewHolder> {
     private ArrayList<Centro> listaCentros;
+    private Context context;
 
-    public CentroAdapter(ArrayList<Centro> listaCentros) {
+    public CentroAdapter(ArrayList<Centro> listaCentros, Context context) {
         this.listaCentros = listaCentros;
+        this.context = context;
     }
 
     @NonNull
@@ -31,6 +35,15 @@ public class CentroAdapter extends RecyclerView.Adapter<CentroAdapter.CentroView
     public void onBindViewHolder(@NonNull CentroViewHolder holder, int position) {
         Centro centro = listaCentros.get(position);
         holder.textViewNombre.setText(centro.getNombre());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CentroActivity.class);
+                intent.putExtra("centro", centro.getNombre()); // Suponiendo que Centro tiene un método getId()
+                intent.putStringArrayListExtra("camposID", centro.getIdCampos());// Suponiendo que Centro tiene un método getId()// Suponiendo que Centro tiene un método getId()
+                context.startActivity(intent);
+            }
+        });
         // Configura otros elementos de diseño según tus necesidades
     }
 

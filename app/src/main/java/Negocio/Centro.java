@@ -9,13 +9,13 @@ import Integracion.UsuarioDB;
 public class Centro {
     private String  nombre;
     private String  localizacion;
-    private ArrayList<Integer> idCampos;
+    private ArrayList<String> idCampos;
     private CentroDB cDB;
 
     public Centro(){
         cDB = new CentroDB();
     }
-    public Centro(String nombre, String localizacion, ArrayList<Integer> idCampos) {
+    public Centro(String nombre, String localizacion, ArrayList<String> idCampos) {
         this.nombre = nombre;
         this.localizacion = localizacion;
         this.idCampos = idCampos;
@@ -41,11 +41,11 @@ public class Centro {
         this.localizacion = localizacion;
     }
 
-    public ArrayList<Integer> getIdCampos() {
+    public ArrayList<String> getIdCampos() {
         return idCampos;
     }
 
-    public void setIdCampos(ArrayList<Integer> idCampos) {
+    public void setIdCampos(ArrayList<String> idCampos) {
         this.idCampos = idCampos;
     }
 }

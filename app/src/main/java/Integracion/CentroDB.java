@@ -31,7 +31,7 @@ public class CentroDB {
                                 // Accede a los datos de cada documento
                                 String nombre = document.getString(myNombre);
                                 String localizacion = document.getString(myLocalizacion);
-                                ArrayList<Integer> idCampos = (ArrayList<Integer>) document.get(myListaId);
+                                ArrayList<String> idCampos = (ArrayList<String>) document.get(myListaId);
 
                                 // Crea un objeto Centro y agrégalo a la lista
                                 Centro centro = new Centro(nombre, localizacion, idCampos);

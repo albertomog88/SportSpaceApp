@@ -82,7 +82,7 @@ public class ReservasFragment extends Fragment {
         recyclerViewCentros.setLayoutManager(new LinearLayoutManager(getActivity()));
         // Inicializar el adaptador con una lista vacía
         listaCentros = new ArrayList<>();
-        centroAdapter = new CentroAdapter(listaCentros);
+        centroAdapter = new CentroAdapter(listaCentros, getContext());
         recyclerViewCentros.setAdapter(centroAdapter);
 
         // Llama a la función obtenerCentros y actualiza el adaptador cuando se complete la consulta
