@@ -35,7 +35,7 @@ public class CampoAdapter extends RecyclerView.Adapter<CampoAdapter.CampoViewHol
     public void onBindViewHolder(@NonNull CampoViewHolder holder, int position) {
         Campo campo = listaCampos.get(position);
         holder.textViewNombre.setText(campo.getNombre());
-        holder.textViewDeporte.setText(campo.getDeporte());
+        //holder.textViewDeporte.setText(campo.getDeporte());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

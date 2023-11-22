@@ -21,12 +21,19 @@ public class Campo {
         cDB = new CampoDB();
     }
 
+    public Campo(String id, String nombre, String deporte) {
+        this.id = id;
+        this.nombre = nombre;
+        this.deporte = deporte;
+        cDB = new CampoDB();
+    }
+
     public Campo(){
         cDB = new CampoDB();
     }
 
-    public ArrayList<Campo> obtenerCampos(ArrayList<String> idCampos, CampoDB.Callback callback){
-        return cDB.obtenerCampos(idCampos, callback);
+    public void obtenerCampos(ArrayList<String> idCampos, CampoDB.Callback callback){
+        cDB.obtenerCampos(idCampos, callback);
     }
 
     public void setId(String id) {
