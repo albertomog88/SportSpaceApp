@@ -1,52 +1,45 @@
 package Presentacion;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
+import androidx.fragment.app.Fragment;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import Integracion.UsuarioDB;
-import Negocio.Usuario;
+import android.view.MenuItem;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import es.ucm.fdi.sportspaceapp.R;
 
 public class MainActivity extends AppCompatActivity {
-
-
-    private EditText et_correo, et_passw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        et_correo = findViewById(R.id.editTextTextEmailAddress);
-        et_passw = findViewById(R.id.editTextTextPassword);
-    }
-
-
-    public void toRegistro(View v){
-        startActivity(new Intent(this, Inicio.class));
-    }
-
-    public void toInicio(View v){
-        String email = et_correo.getText().toString();
-        String pass = et_passw.getText().toString();
-        Usuario.comprobarCorreContra(email, pass, new UsuarioDB.Callback() {
+        setContentView(R.layout.activity_inicio);
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onCallback(boolean isMatch) {
-                if (isMatch) {
-                    // La contraseña es correcta, iniciar nueva actividad
-                    Intent intent = new Intent(MainActivity.this, Inicio.class);
-                    startActivity(intent);
-                } else {
-                    // Contraseña incorrecta, mostrar mensaje
-                    Toast.makeText(MainActivity.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selectedFragment = null;
+
+                int itemId = item.getItemId();
+                if (itemId == R.id.nav_inicio) {
+                    selectedFragment = new ReservasFragment();
+                } else if (itemId == R.id.nav_reservas) {
+                    selectedFragment = new ReservasFragment();
+                } else if (itemId == R.id.nav_equipos) {
+                    selectedFragment = new ReservasFragment();
+                } else if (itemId == R.id.nav_perfil) {
+                    selectedFragment = new ReservasFragment();
                 }
+                if (selectedFragment != null) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                }
+                return true;
             }
         });
 
-        startActivity(new Intent(this, RegistroActivity.class));
+        // Cargar el fragmento inicial
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ReservasFragment()).commit();
+            bottomNav.setSelectedItemId(R.id.nav_inicio);
+        }
     }
 }

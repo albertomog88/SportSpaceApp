@@ -1,7 +1,5 @@
 package Negocio;
 
-import java.lang.reflect.Constructor;
-
 import Integracion.UsuarioDB;
 
 public class Usuario {
@@ -25,10 +23,6 @@ public class Usuario {
     }
     public void existe(UsuarioDB.Callback callback){
         uDB.existe(this, callback);
-    }
-
-    public static void comprobarCorreContra(String email, String pass, UsuarioDB.Callback callback){
-        uDB.comprobarCorreContra(email, pass, callback);
     }
 
     public String getNombre() {

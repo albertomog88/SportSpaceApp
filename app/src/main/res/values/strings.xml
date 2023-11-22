@@ -15,7 +15,7 @@
     <string name="editFechaNac">Fecha de Nacimiento</string>
     <string name="editPassword">Contraseña</string>
 
-    //Vista Inico
+    //Vista Inicio
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="close_nav">Close Navigation Drawer</string>
     <string name="inicio">Inicio</string>

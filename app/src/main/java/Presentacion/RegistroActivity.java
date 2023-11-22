@@ -4,11 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import Integracion.UsuarioDB;
 import Negocio.Usuario;
 import es.ucm.fdi.sportspaceapp.R;
@@ -69,7 +67,7 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     public void toInicio(View v){
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
 
     }
 }
