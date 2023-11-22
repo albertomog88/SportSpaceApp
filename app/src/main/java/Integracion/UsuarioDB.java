@@ -1,5 +1,11 @@
 package Integracion;
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.HashMap;
@@ -7,11 +13,10 @@ import Negocio.Usuario;
 
 public class UsuarioDB {
     private String myCol = "Usuarios";
-    private String myColUsers = "users";
     private String myNombre = "nombre";
     private String myApellidos = "apellidos";
     private String myEmail = "email";
-    private String myPass = "password";
+    private String myPass = "pass";
     private String myFecha = "fechaNacimiento";
 
     public boolean guardar(Usuario u){
@@ -26,13 +31,22 @@ public class UsuarioDB {
             }}
         );
 
-        //Intento de añadir a los usuarios tmb en la tabla de users para q puedan iniciar sesion
-        /*SingletonDataBase.getInstance().getDB().collection(myColUsers).document(id).set(
-            new HashMap<String, Object>() {{
-                put(myEmail, u.getEmail());
-                put(myPass, u.getPass());
-            }}
-        );*/
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.createUserWithEmailAndPassword(u.getEmail(), u.getPass()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    String id = auth.getCurrentUser().getUid();
+                    SingletonDataBase.getInstance().getDB().collection("user").document(id).set(
+                        new HashMap<String, Object>() {{
+                            put(myEmail, u.getEmail());
+                            put(myPass, u.getPass());
+                        }}
+                    );
+                }
+            }
+        });
 
         return true;
     }
