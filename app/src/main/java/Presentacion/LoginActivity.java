@@ -1,7 +1,10 @@
 package Presentacion;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -15,6 +18,7 @@ import es.ucm.fdi.sportspaceapp.R;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText et_email, et_pass;
+    private CheckBox showPasswordCheckBox;
     private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,21 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         et_email = findViewById(R.id.ed_email);
         et_pass = findViewById(R.id.ed_pass);
+        showPasswordCheckBox = findViewById(R.id.checkBoxShowPassword);
+
+        showPasswordCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Cambiar la visibilidad de la contraseña según el estado del CheckBox
+                if (isChecked) {
+                    // Hacer la contraseña visible
+                    et_pass.setTransformationMethod(null);
+                } else {
+                    // Ocultar la contraseña
+                    et_pass.setTransformationMethod(new PasswordTransformationMethod());
+                }
+            }
+        });
     }
 
     public void ToIniciarSesion(View v){

@@ -14,6 +14,7 @@
     <string name="editCorreo">Correo</string>
     <string name="editFechaNac">Fecha de Nacimiento</string>
     <string name="editPassword">Contraseña</string>
+    <string name="editPassword2">Repite Contraseña</string>
 
     //Vista Inicio
     <string name="open_nav">Open Navigation Drawer</string>
