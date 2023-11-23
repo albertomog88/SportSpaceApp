@@ -4,7 +4,7 @@
     <string name="txtInicioSesion">Inicio de Sesión</string>
     <string name="editMail">Correo</string>
     <string name="editPass">Contraseña</string>
-
+    <string name="checkVer">Ver</string>
     <string name="btnInicio">Inicio</string>
     <string name="btnRegistro">Registro</string>
     //Vista Registro
@@ -15,7 +15,7 @@
     <string name="editCorreo">Correo</string>
     <string name="editFechaNac">Fecha de Nacimiento</string>
     <string name="editPassword">Contraseña</string>
-
+    <string name="checkVer2">Ver</string>
     <string name="editPassword2">Repite Contraseña</string>
 
     //Vista Inicio
