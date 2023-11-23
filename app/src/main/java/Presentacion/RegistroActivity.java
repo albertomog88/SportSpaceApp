@@ -108,9 +108,11 @@ public class RegistroActivity extends AppCompatActivity {
         String email = et_correo.getText().toString();
         String pass = et_passw.getText().toString();
         String pass2 = et_passw2.getText().toString();
-        Usuario u = new Usuario(nombre, ape1,  email, pass, fecha);
+
 
         if(validarCampos(nombre, ape1, ape2, fecha, email, pass, pass2)) {
+
+            Usuario u = new Usuario(nombre, ape1,  email, pass, fecha);
             u.existe(new UsuarioDB.Callback() {
                 @Override
                 public void onCallback(boolean exists) {
@@ -133,11 +135,15 @@ public class RegistroActivity extends AppCompatActivity {
             });
 
         }
+        else{
+            Toast.makeText(RegistroActivity.this, "Hafallado algo", Toast.LENGTH_LONG).show();
+        }
     }
 
     private boolean validarCampos(String nombre, String apellido1, String apellido2, String fechaNacimiento, String correo, String passw, String passw2) {
         // Verificar que todos los campos estén completos
-        if (TextUtils.isEmpty(nombre) || TextUtils.isEmpty(apellido1) || TextUtils.isEmpty(apellido1) || TextUtils.isEmpty(fechaNacimiento) ||
+        if (TextUtils.isEmpty(nombre) || TextUtils.isEmpty(apellido1) ||
+                TextUtils.isEmpty(apellido2) || TextUtils.isEmpty(fechaNacimiento) ||
                 TextUtils.isEmpty(correo) || TextUtils.isEmpty(passw)) {
             Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
             return false;
@@ -192,7 +198,7 @@ public class RegistroActivity extends AppCompatActivity {
         et_correo.setText("");
     }
 
-    private void toInicio(View v){
+    public void toInicio(View v){
         startActivity(new Intent(this, LoginActivity.class));
 
     }
