@@ -26,6 +26,8 @@
     <string name="txtIncio">Inicio</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cambiar_contrase_a">Cambiar contraseña</string>
+    <string name="cerrar_sesi_n">Cerrar sesión</string>
 
 
 </resources>
