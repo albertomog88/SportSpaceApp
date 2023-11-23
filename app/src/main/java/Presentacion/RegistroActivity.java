@@ -40,6 +40,9 @@ public class RegistroActivity extends AppCompatActivity {
         et_ape1 = findViewById(R.id.ed_ape1);
         et_ape2 = findViewById(R.id.ed_ape2);
         et_fechNac = findViewById(R.id.ed_fechNac);
+        //Evitamos que se despliegue el teclado para usar el calendario
+        et_fechNac.setFocusable(false);
+        et_fechNac.setFocusableInTouchMode(false);
         et_fechNac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
