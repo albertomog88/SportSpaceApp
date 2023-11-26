@@ -15,37 +15,48 @@
         <TextView
             android:id="@+id/tituloCampo"
             android:text="Titulo Campo"
-            android:textSize="30dp"
+            android:textSize="33dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
+
         <TextView
             android:id="@+id/tituloFecha"
-            android:text="Fecha"
-            android:textSize="30dp"
+            android:text="Fecha seleccionada"
+            android:textSize="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
-        <DatePicker
+        <TextView
+            android:id="@+id/fechaCampo"
+            android:text="Titulo Campo"
+            android:textSize="25dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </DatePicker>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/tituloHorario"
-            android:text="Horario"
-            android:textSize="30dp"
+            android:text="Horas Disponibles"
+            android:textSize="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewCampos"
+            android:id="@+id/recyclerViewHorarios"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="40dp" />
+            android:padding="30dp" />
+        <Button
+            android:id="@+id/butttonReservar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reservar"
+            android:onClick="toReservar">
+
+        </Button>
     </LinearLayout>
 
 </LinearLayout>

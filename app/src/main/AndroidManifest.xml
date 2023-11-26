@@ -16,6 +16,9 @@
             android:name="Presentacion.CentroActivity"
             android:exported="true" />
         <activity
+            android:name="Presentacion.CampoActivity"
+            android:exported="true" />
+        <activity
             android:name="Presentacion.MainActivity"
             android:exported="true" />
         <activity

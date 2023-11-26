@@ -14,6 +14,7 @@ import java.util.List;
 import Integracion.CampoDB;
 import Negocio.Campo;
 import Negocio.Centro;
+import Negocio.Horario;
 import es.ucm.fdi.sportspaceapp.R;
 
 public class CentroActivity extends AppCompatActivity {
@@ -43,8 +44,12 @@ public class CentroActivity extends AppCompatActivity {
         // Establecer el título (puedes modificarlo para que reciba el nombre del centro desde un Intent, por ejemplo)
         tituloCentro.setText(nombreCentro);
 
-        Centro centro = new Centro();
         campo.obtenerCampos(camposID, new CampoDB.Callback() {
+
+            @Override
+            public void success(List<Horario> listaHorarios) {
+
+            }
 
             @Override
             public void onSuccess(ArrayList<Campo> campos) {

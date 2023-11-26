@@ -36,6 +36,18 @@ public class Campo {
         cDB.obtenerCampos(idCampos, callback);
     }
 
+    public void verificarYActualizarDisponibilidad(String idBuscado, String fecha, CampoDB.Callback callback){
+        cDB.verificarYActualizarDisponibilidad(idBuscado, fecha, callback);
+    }
+
+    public void insertarReserva(String idUsuario, String idCampo, String fecha, List<Horario> listaHoras){
+        cDB.insertarReserva(idUsuario, idCampo, fecha, listaHoras);
+    }
+
+    public void actualizarDisponibilidad(String idCampo, String fecha, List<Horario> listaHoras){
+        cDB.actualizarDisponibilidad(idCampo, fecha, listaHoras);
+    }
+
     public void setId(String id) {
         this.id = id;
     }

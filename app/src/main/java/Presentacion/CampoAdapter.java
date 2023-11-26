@@ -42,6 +42,8 @@ public class CampoAdapter extends RecyclerView.Adapter<CampoAdapter.CampoViewHol
                 Intent intent = new Intent(context, CampoActivity.class);
                 intent.putExtra("nombre_campo", campo.getNombre());
                 intent.putExtra("deporte_campo", campo.getDeporte());
+                intent.putExtra("id_campo", campo.getId());
+
                 context.startActivity(intent);
             }
         });
