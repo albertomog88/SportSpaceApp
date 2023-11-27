@@ -4,11 +4,12 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import java.util.ArrayList;
@@ -29,11 +30,9 @@ public class ReservasFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String mParam1, mParam2;
     private Spinner spinner;
     private EditText buscador;
-    private Button btnBusqueda;
     private RecyclerView recyclerViewCentros;
     private CentroAdapter centroAdapter;
     private ArrayList<Centro> listaCentros;
@@ -74,7 +73,6 @@ public class ReservasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_reservas, container, false);
 
-        this.btnBusqueda = rootView.findViewById(R.id.btnBusqueda);
         this.buscador = rootView.findViewById(R.id.buscador);
         this.spinner = rootView.findViewById(R.id.spinner1);
         String [] arraySpinner = {getString(R.string.spn1), getString(R.string.spn2), getString(R.string.spn3)};
@@ -89,10 +87,16 @@ public class ReservasFragment extends Fragment {
         centroAdapter = new CentroAdapter(listaCentros, getContext());
         recyclerViewCentros.setAdapter(centroAdapter);
 
-        btnBusqueda.setOnClickListener(
-                view -> obtenerCentros(view)
-        );
-        obtenerCentros(getView());
+        buscador.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                obtenerCentros(getView());
+            }
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
 
         return rootView;
     }
