@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import es.ucm.fdi.sportspaceapp.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -82,6 +84,15 @@ public class LoginActivity extends AppCompatActivity {
     //Comprueba si has iniciado sesion hace poco y te mete directamente en la aplicacion
     protected void onStart() {
         super.onStart();
-        auth.signOut();
+
+        //Comentar si se quiere probar inicio de sesion
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null){
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
+
+        //Cierra la sesion para probar inicio de sesion
+        //auth.signOut();
     }
 }

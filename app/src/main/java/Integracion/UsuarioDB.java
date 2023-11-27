@@ -12,7 +12,7 @@ import java.util.HashMap;
 import Negocio.Usuario;
 
 public class UsuarioDB {
-    private String myCol = "Usuarios";
+    private String myCol = "user";
     private String myNombre = "nombre";
     private String myApellidos = "apellidos";
     private String myEmail = "email";
@@ -26,7 +26,7 @@ public class UsuarioDB {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     String id = auth.getCurrentUser().getUid();
-                    SingletonDataBase.getInstance().getDB().collection("user").document(id).set(
+                    SingletonDataBase.getInstance().getDB().collection(myCol).document(id).set(
                         new HashMap<String, Object>() {{
                             put(myNombre, u.getNombre());
                             put(myApellidos, u.getApellidos());

@@ -7,6 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import java.util.ArrayList;
 import Integracion.CentroDB;
 import Negocio.Centro;
@@ -27,7 +31,9 @@ public class ReservasFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private Spinner spinner;
+    private EditText buscador;
+    private Button btnBusqueda;
     private RecyclerView recyclerViewCentros;
     private CentroAdapter centroAdapter;
     private ArrayList<Centro> listaCentros;
@@ -65,9 +71,15 @@ public class ReservasFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_reservas, container, false);
+
+        this.btnBusqueda = rootView.findViewById(R.id.btnBusqueda);
+        this.buscador = rootView.findViewById(R.id.buscador);
+        this.spinner = rootView.findViewById(R.id.spinner1);
+        String [] arraySpinner = {getString(R.string.spn1), getString(R.string.spn2), getString(R.string.spn3)};
+        ArrayAdapter<String> optSpinner = new ArrayAdapter<>(getActivity().getApplicationContext(), R.layout.spinner_options, arraySpinner);
+        this.spinner.setAdapter(optSpinner);
 
         // Configurar el RecyclerView
         recyclerViewCentros = rootView.findViewById(R.id.recyclerViewCentros);
@@ -77,9 +89,29 @@ public class ReservasFragment extends Fragment {
         centroAdapter = new CentroAdapter(listaCentros, getContext());
         recyclerViewCentros.setAdapter(centroAdapter);
 
+        btnBusqueda.setOnClickListener(
+                view -> obtenerCentros(view)
+        );
+        obtenerCentros(getView());
+
+        return rootView;
+    }
+
+    public void obtenerCentros(View v){
+        String filtro_busqueda = spinner.getSelectedItem().toString();
+        String texto_busqueda = buscador.getText().toString();
+
+        if (filtro_busqueda.equals(getString(R.string.spn1))) {
+            filtro_busqueda = "nombre";
+        } else if (filtro_busqueda.equals(getString(R.string.spn2))) {
+            filtro_busqueda = "lista";
+        }else if (filtro_busqueda.equals(getString(R.string.spn3))) {
+            filtro_busqueda = "localizacion";
+        }
+
         // Llama a la función obtenerCentros y actualiza el adaptador cuando se complete la consulta
         Centro centro = new Centro();
-        centro.obtenerCentros(new CentroDB.CentroCallback() {
+        centro.obtenerCentros(filtro_busqueda, texto_busqueda, new CentroDB.CentroCallback() {
             @Override
             public void onCentrosObtenidos(ArrayList<Centro> centros) {
                 // Actualiza la lista de centros y notifica al adaptador
@@ -93,7 +125,5 @@ public class ReservasFragment extends Fragment {
                 // Maneja errores aquí
             }
         });
-
-        return rootView;
     }
 }

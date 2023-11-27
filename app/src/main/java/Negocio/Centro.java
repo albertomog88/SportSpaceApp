@@ -1,10 +1,7 @@
 package Negocio;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import Integracion.CentroDB;
-import Integracion.UsuarioDB;
 
 public class Centro {
     private String  nombre;
@@ -22,8 +19,8 @@ public class Centro {
         this.cDB = new CentroDB();
     }
 
-    public ArrayList<Centro> obtenerCentros(CentroDB.CentroCallback callback){
-        return cDB.obtenerCentros(callback);
+    public ArrayList<Centro> obtenerCentros(String filtro_busqueda, String texto_busqueda, CentroDB.CentroCallback callback){
+        return cDB.obtenerCentros(filtro_busqueda, texto_busqueda, callback);
     }
     public String getNombre() {
         return nombre;
