@@ -13,6 +13,9 @@
         android:theme="@style/Theme.SportSpaceApp"
         tools:targetApi="31">
         <activity
+            android:name="Presentacion.VerDetallesReservaActivity"
+            android:exported="false" />
+        <activity
             android:name="Presentacion.CentroActivity"
             android:exported="true" />
         <activity
@@ -34,4 +37,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
