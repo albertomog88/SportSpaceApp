@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">SportSpaceApp</string>
+    <string name="sportspace">SPORTSPACE</string>
+    <string name="txtNuevoApp">¿Nuevo en la app? Regístrate aquí</string>
     //Vista Login
     <string name="txtInicioSesion">Inicio de Sesión</string>
     <string name="editMail">Correo</string>
