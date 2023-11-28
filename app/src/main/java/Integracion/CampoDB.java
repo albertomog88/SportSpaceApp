@@ -33,43 +33,30 @@ public class CampoDB {
     }
 
     public void obtenerCampos(ArrayList<String> idCampos, Callback callback) {
-        List<Task<DocumentSnapshot>> tasks = new ArrayList<>();
         ArrayList<Campo> listaCampos = new ArrayList<>();
+
         SingletonDataBase.getInstance().getDB().collection(myCol).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            // La consulta se completó exitosamente
-                            QuerySnapshot querySnapshot = task.getResult();
-                            // Lista para almacenar los centros recuperados
-                            // Recorre los documentos en la colección
-                            int i = 0;
-                            for (QueryDocumentSnapshot document : querySnapshot) {
-                                if(document.getString(myID).equals(idCampos.get(i))){
-                                    // Accede a los datos de cada documento
-                                    String nombre = document.getString(myNombre);
-                                    String id = document.getString(myID);
-                                    String deporte = document.getString(myDeporte);
-                                    //ArrayList<String> idCampos = (ArrayList<String>) document.get(myListaId);
-
-                                    // Crea un objeto Centro y agrégalo a la lista
-                                    Campo campo = new Campo(id, nombre, deporte);
-                                    listaCampos.add(campo);
-                                }
-                                i++;
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot querySnapshot = task.getResult();
+                        for (QueryDocumentSnapshot document : querySnapshot) {
+                            String id = document.getString(myID);
+                            // Comprobar si el ID del documento está en la lista de IDs de campos
+                            if (idCampos.contains(id)) {
+                                // Accede a los datos de cada documento
+                                String nombre = document.getString("nombre");
+                                String deporte = document.getString("deporte");
+                                Campo campo = new Campo(id, nombre, deporte);
+                                listaCampos.add(campo);
                             }
-
-                            // Llama al método de la interfaz cuando se hayan recuperado todos los centros
-                            callback.onSuccess(listaCampos);
-                        } else {
-                            // Llama al método de la interfaz en caso de error
-                            callback.onError(task.getException());
                         }
+                        // Llama al método onSuccess de la interfaz de callback
+                        callback.onSuccess(listaCampos);
+                    } else {
+                        // Llama al método onError de la interfaz de callback
+                        callback.onError(task.getException());
                     }
                 });
-
-
     }
 
     public void verificarYActualizarDisponibilidad(String idBuscado, String fecha, Callback callback) {
