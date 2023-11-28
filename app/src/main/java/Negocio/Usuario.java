@@ -18,6 +18,7 @@ public class Usuario {
         uDB = new UsuarioDB();
     }
 
+
     public boolean guardar(){
         return uDB.guardar(this);
     }

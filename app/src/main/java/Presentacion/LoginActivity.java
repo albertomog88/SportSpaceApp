@@ -11,11 +11,14 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import es.ucm.fdi.sportspaceapp.R;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText et_email, et_pass;
     private FirebaseAuth auth;
+    private FirebaseUser currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,16 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         et_email = findViewById(R.id.ed_email);
         et_pass = findViewById(R.id.ed_pass);
+        currentUser = auth.getCurrentUser();
+
+        if(currentUser != null){
+            finish();
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            Toast.makeText(LoginActivity.this, "Bienvenido "+currentUser.getEmail(), Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(LoginActivity.this, "Usuario no logeado", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void ToIniciarSesion(View v){
@@ -64,5 +77,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         auth.signOut();
+    }
+
+    public FirebaseAuth getAuth(){
+        return this.auth;
     }
 }

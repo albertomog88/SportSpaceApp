@@ -30,8 +30,8 @@ import es.ucm.fdi.sportspaceapp.R;
 
 public class CampoActivity extends AppCompatActivity {
 
-    private TextView tituloCampo;
-    private TextView fecha;
+    private TextView tituloCampo, fecha, disponibles;
+
     private Button reservarButton;
     private RecyclerView recyclerView;
     private HorarioAdapter horarioAdapter;
@@ -58,6 +58,9 @@ public class CampoActivity extends AppCompatActivity {
         tituloCampo = findViewById(R.id.tituloCampo);
         tituloCampo.setText(nombreCampo);
 
+
+
+
         fecha = findViewById(R.id.fechaCampo); // Asegúrate de que este ID exista en tu layout
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +74,11 @@ public class CampoActivity extends AppCompatActivity {
         fecha.setText(fechaActual);
         // Aquí deberías obtener tu lista de horarios de alguna forma
         listaHorarios = new ArrayList<Horario>(); // Implementa este método
+
+        disponibles = findViewById(R.id.tituloHorario);
+
+
+
         horarioAdapter = new HorarioAdapter(listaHorarios, this);
         recyclerView.setAdapter(horarioAdapter);
         campo = new Campo();
@@ -95,6 +103,7 @@ public class CampoActivity extends AppCompatActivity {
                 });
                 listaHorarios.clear();
                 listaHorarios.addAll(horarios);
+                disponibles.setText("Numero de horas disponibles "+listaHorarios.size());
                 horarioAdapter.notifyDataSetChanged();
             }
 
@@ -113,13 +122,25 @@ public class CampoActivity extends AppCompatActivity {
 
 
     public void toReservar() {
+
+
         FirebaseUser usuarioActual = FirebaseAuth.getInstance().getCurrentUser();
-        String email = usuarioActual.getEmail();
-        List<Horario> horariosSeleccionados = horarioAdapter.obtenerHorariosSeleccionados();
-        campo.insertarReserva(email, idCampo, fecha.getText().toString(), horariosSeleccionados);
-        //campo.actualizarDisponibilidad(idCampo, fecha.getText().toString(), horariosSeleccionados);
-        finish();
+        //Controlamos que el usuario este logeado
+        if(usuarioActual != null){
+            String email = usuarioActual.getEmail();
+            List<Horario> horariosSeleccionados = horarioAdapter.obtenerHorariosSeleccionados();
+            campo.insertarReserva(email, idCampo, fecha.getText().toString(), horariosSeleccionados);
+            //campo.actualizarDisponibilidad(idCampo, fecha.getText().toString(), horariosSeleccionados);
+            finish();
+        }
+        else{
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+
     }
+
+
 
     private void actualizarListaHorarios(String idCampo, String fecha) {
         campo.verificarYActualizarDisponibilidad(idCampo, fecha, new CampoDB.Callback() {
@@ -162,6 +183,8 @@ public class CampoActivity extends AppCompatActivity {
                         actualizarListaHorarios(idCampo, fechaSeleccionada);
                     }
                 }, year, month, day);
+        //Evitamos que pueda reservar en una fecha anterior que la actual.
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
         datePickerDialog.show();
     }
