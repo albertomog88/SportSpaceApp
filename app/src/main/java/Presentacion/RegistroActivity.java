@@ -29,7 +29,7 @@ import es.ucm.fdi.sportspaceapp.R;
 public class RegistroActivity extends AppCompatActivity {
 
     private EditText et_nombre, et_ape1, et_ape2, et_fechNac, et_correo, et_passw, et_passw2;
-    private CheckBox showPasswordCheckBox;
+    //private CheckBox showPasswordCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ public class RegistroActivity extends AppCompatActivity {
         et_passw = findViewById(R.id.ed_pass);
         et_passw2 = findViewById(R.id.ed_pass2);
 
+        /*
         showPasswordCheckBox = findViewById(R.id.checkVerPass);
 
         showPasswordCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -69,7 +70,7 @@ public class RegistroActivity extends AppCompatActivity {
                     et_passw2.setTransformationMethod(new PasswordTransformationMethod());
                 }
             }
-        });
+        });*/
     }
 
     private void mostrarDatePickerDialog() {

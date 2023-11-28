@@ -1,92 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/fondo_gris"
     tools:context="Presentacion.LoginActivity">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/titulo"
+        style="@style/TituloMarca"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="118dp"
-        android:layout_marginBottom="73dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/audiowide"
+        android:gravity="center"
+        android:text="@string/sportspace" />
+
+    <TextView
+        android:id="@+id/IniciarSesionText"
+        style="@style/TitulosGenericos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/audiowide"
+        android:gravity="center"
         android:text="@string/txtInicioSesion"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/ed_email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        />
 
-    <EditText
-        android:id="@+id/ed_email"
-        android:layout_width="331dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="36dp"
-        android:ems="10"
-        android:hint="@string/editMail"
-        android:inputType="textEmailAddress"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/checkBoxShowPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <EditText
-        android:id="@+id/ed_pass"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="95dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="109dp"
-        android:ems="10"
-        android:hint="@string/editPass"
-        android:inputType="textPassword"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button"
-        app:layout_constraintEnd_toStartOf="@+id/checkBoxShowPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ed_email" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="331dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="23dp"
-        android:onClick="ToIniciarSesion"
-        android:text="@string/btnInicio"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxShowPassword" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="331dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="305dp"
-        android:onClick="toRegistro"
-        android:text="@string/btnRegistro"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-    <CheckBox
-        android:id="@+id/checkBoxShowPassword"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="39dp"
-        android:text="@string/checkVer2"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ed_pass"
-        app:layout_constraintTop_toBottomOf="@+id/ed_email" />
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ed_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView"
+            android:hint="@string/editMail"
+            app:boxStrokeColor="#CFD8DC"
+            app:hintTextColor="#CFD8DC"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:textColorHint="#CFD8DC">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#CFD8DC"
+                android:inputType="textEmailAddress"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ed_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView"
+            android:hint="@string/editPass"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:passwordToggleEnabled="true"
+            app:boxStrokeColor="#CFD8DC"
+            app:hintTextColor="#CFD8DC"
+            android:textColorHint="#CFD8DC">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="#CFD8DC"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/amiko_bold"
+            android:text="@string/btnInicio"
+            android:id="@+id/button"
+            android:textColor="#455A64"
+            android:textSize="25dp"
+            android:onClick="ToIniciarSesion"
+            app:backgroundTint="#8BC34A"></Button>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtNuevoApp"
+            android:textColor="#CFD8DC"
+            android:textSize="15dp"
+            android:id="@+id/TextNuevoApp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amiko_bold"
+            android:onClick="toRegistro"
+            android:text="@string/btnRegistro"
+            android:textColor="#455A64"
+            android:textSize="25dp"
+            app:backgroundTint="#8BC34A"></Button>
+
+    </LinearLayout>
+</LinearLayout>

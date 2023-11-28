@@ -18,7 +18,7 @@ import es.ucm.fdi.sportspaceapp.R;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText et_email, et_pass;
-    private CheckBox showPasswordCheckBox;
+    //private CheckBox showPasswordCheckBox;
     private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         et_email = findViewById(R.id.ed_email);
         et_pass = findViewById(R.id.ed_pass);
+
+        /*
         showPasswordCheckBox = findViewById(R.id.checkBoxShowPassword);
 
         showPasswordCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -41,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                     et_pass.setTransformationMethod(new PasswordTransformationMethod());
                 }
             }
-        });
+        });*/
     }
 
     public void ToIniciarSesion(View v){

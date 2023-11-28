@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">SportSpaceApp</string>
     //Vista Login
+    <string name="sportspace">SPORTSPACE</string>
     <string name="txtInicioSesion">Inicio de Sesión</string>
     <string name="editMail">Correo</string>
     <string name="editPass">Contraseña</string>
-    <string name="checkVer">Ver</string>
+    <string name="txtNuevoApp">¿Nuevo en la app? Regístrate aquí</string>
     <string name="btnInicio">Inicio</string>
     <string name="btnRegistro">Registro</string>
     //Vista Registro
@@ -15,8 +16,8 @@
     <string name="editCorreo">Correo</string>
     <string name="editFechaNac">Fecha de Nacimiento</string>
     <string name="editPassword">Contraseña</string>
-    <string name="checkVer2">Ver</string>
     <string name="editPassword2">Repite Contraseña</string>
+    <string name="txtCuentaYaCreada">¿Ya tienes cuenta? Dale a Inicio Sesión</string>
 
     //Vista Inicio
     <string name="open_nav">Open Navigation Drawer</string>
