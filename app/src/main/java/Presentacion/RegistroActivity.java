@@ -42,6 +42,11 @@ public class RegistroActivity extends AppCompatActivity {
 
         u.existe(new UsuarioDB.Callback() {
             @Override
+            public void getUsuario(Usuario u) {
+
+            }
+
+            @Override
             public void onCallback(boolean exists) {
                 if (!exists) {
                     // Usuario no existe, proceder con el registro
@@ -58,6 +63,11 @@ public class RegistroActivity extends AppCompatActivity {
                     Vaciar();
                     Toast.makeText(RegistroActivity.this, "El usuario ya existe", Toast.LENGTH_LONG).show();
                 }
+            }
+
+            @Override
+            public void onError(Exception e) {
+
             }
         });
     }

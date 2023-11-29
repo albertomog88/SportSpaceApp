@@ -9,6 +9,10 @@ public class Usuario {
     private String pass;
     private String fecha;
     private static UsuarioDB uDB;
+
+    public Usuario (){
+
+    }
     public Usuario (String nombre, String apellidos, String email, String pass, String fecha){
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -18,6 +22,9 @@ public class Usuario {
         uDB = new UsuarioDB();
     }
 
+    public UsuarioDB getUsuario(UsuarioDB.Callback callback){
+        return uDB.getUsuario(callback);
+    }
 
     public boolean guardar(){
         return uDB.guardar(this);

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity{
                 } else if (itemId == R.id.nav_equipos) {
                     selectedFragment = new ReservasFragment();
                 } else if (itemId == R.id.nav_perfil) {
-                    selectedFragment = new ReservasFragment();
+                    selectedFragment = new PerfilFragment();
                 }
                 if (selectedFragment != null) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
