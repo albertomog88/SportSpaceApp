@@ -32,7 +32,6 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ed_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView"
@@ -43,6 +42,7 @@
                 android:textColorHint="#CFD8DC">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_nombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#CFD8DC"
@@ -51,7 +51,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ed_ape1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView"
@@ -62,6 +61,7 @@
                 android:textColorHint="#CFD8DC">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_ape1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#CFD8DC"
@@ -70,7 +70,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ed_ape2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView"
@@ -81,6 +80,7 @@
                 android:textColorHint="#CFD8DC">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_ape2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#CFD8DC"
@@ -90,7 +90,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ed_fechNac"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView"
@@ -101,6 +100,7 @@
                 android:textColorHint="#CFD8DC">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_fechNac"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#CFD8DC"
@@ -109,7 +109,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ed_correo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView"
@@ -120,6 +119,7 @@
                 android:textColorHint="#CFD8DC">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_correo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#CFD8DC"
@@ -128,7 +128,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ed_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView"
@@ -140,6 +139,7 @@
                 android:textColorHint="#CFD8DC">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
@@ -147,7 +147,6 @@
                     />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ed_pass2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView"
@@ -159,6 +158,7 @@
                 android:textColorHint="#CFD8DC">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_pass2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
