@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -39,12 +41,16 @@ public class CampoActivity extends AppCompatActivity {
     private Campo campo;
     private String idCampo;
 
+    private FirebaseUser usuarioActual ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campo);
+
         Intent intent = getIntent();
         String nombreCampo = getIntent().getStringExtra("nombre_campo");
+        usuarioActual = FirebaseAuth.getInstance().getCurrentUser();
         idCampo = getIntent().getStringExtra("id_campo"); // Asignar a la variable idCampo
         reservarButton = findViewById(R.id.butttonReservar);
         reservarButton.setOnClickListener(new View.OnClickListener() {
@@ -124,14 +130,21 @@ public class CampoActivity extends AppCompatActivity {
     public void toReservar() {
 
 
-        FirebaseUser usuarioActual = FirebaseAuth.getInstance().getCurrentUser();
+
         //Controlamos que el usuario este logeado
         if(usuarioActual != null){
             String email = usuarioActual.getEmail();
             List<Horario> horariosSeleccionados = horarioAdapter.obtenerHorariosSeleccionados();
-            campo.insertarReserva(email, idCampo, fecha.getText().toString(), horariosSeleccionados);
-            //campo.actualizarDisponibilidad(idCampo, fecha.getText().toString(), horariosSeleccionados);
-            finish();
+            String horas="";
+            for (Horario elemento : horariosSeleccionados) {
+                horas+=elemento.getHora()+ " ";
+            }
+            showDialog("Resera realizada con exito",
+                    "Usuario: "+email+"\n"+
+                            tituloCampo.getText().toString()+"\n"+
+                            "Fecha: "+fecha.getText().toString()+"\n"+
+                            "Horas: "+horas);
+
         }
         else{
             finish();
@@ -187,5 +200,25 @@ public class CampoActivity extends AppCompatActivity {
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
         datePickerDialog.show();
+    }
+
+    private void showDialog(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Código a ejecutar cuando se hace clic en el botón "Aceptar"String email = ;
+                        campo.insertarReserva(usuarioActual.getEmail(), idCampo, fecha.getText().toString(), horarioAdapter.obtenerHorariosSeleccionados());
+                        finish();
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Código a ejecutar cuando se hace clic en el botón "Cancelar"
+                        finish();
+                    }
+                })
+                .show();
     }
 }
