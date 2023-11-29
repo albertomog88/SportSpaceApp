@@ -20,12 +20,25 @@
             android:id="@+id/mailUsu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Email" />
 
         <TextView
             android:id="@+id/nombreApeUsu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Nombre Completo" />
+
+        <TextView
+            android:id="@+id/fechNacUsu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fecha Nac" />
+
+        <Button
+            android:id="@+id/cierreSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="cierreSesion"
+            android:text="Cerrar Sesion" />
     </LinearLayout>
 </FrameLayout>

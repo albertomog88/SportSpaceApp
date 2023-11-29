@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import Integracion.UsuarioDB;
 import Negocio.Usuario;
 import es.ucm.fdi.sportspaceapp.R;
 
@@ -31,8 +32,9 @@ public class PerfilFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private TextView mail, nombreApe;
+    private TextView mail, nombreApe, fechaNac;
 
+    private FirebaseAuth mAuth;
     public PerfilFragment() {
         // Required empty public constructor
     }
@@ -62,20 +64,48 @@ public class PerfilFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mAuth=FirebaseAuth.getInstance();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Usuario u
+
         View rootView = inflater.inflate(R.layout.fragment_perfil, container, false);
         FirebaseUser usuarioActual = FirebaseAuth.getInstance().getCurrentUser();
+
         mail = rootView.findViewById(R.id.mailUsu);
 
-        nombreApe = rootView.findViewById(R.id.nombreApeUsu);
-        mail.setText(usuarioActual.getEmail());
 
+        mail.setText("Email: "+usuarioActual.getEmail());
+
+        Usuario u = new Usuario();
+        u.getUsuario(usuarioActual.getEmail(), new UsuarioDB.Callback() {
+            @Override
+            public void success(Usuario u) {
+                nombreApe = rootView.findViewById(R.id.nombreApeUsu);
+                nombreApe.setText("Nombre Completo: "+u.getNombre()+" "+u.getApellidos());
+
+                fechaNac = rootView.findViewById(R.id.fechNacUsu);
+                fechaNac.setText(("Fecha de Nacimiento: "+ u.getFecha()));
+            }
+
+            @Override
+            public void onCallback(boolean exists) {
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
         return rootView;
+    }
+
+    public void cierreSesion(View v){
+
+        mAuth.signOut();
     }
 }

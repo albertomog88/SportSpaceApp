@@ -42,7 +42,7 @@ public class RegistroActivity extends AppCompatActivity {
 
         u.existe(new UsuarioDB.Callback() {
             @Override
-            public void getUsuario(Usuario u) {
+            public void success(Usuario u){
 
             }
 

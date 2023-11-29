@@ -1,5 +1,7 @@
 package Integracion;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,37 +48,34 @@ public class UsuarioDB {
         return true;
     }
 
-    public void getUsuario(Callback callback){
+    public void getUsuario(String mail, Callback callback) {
 
-        SingletonDataBase.getInstance().getDB().collection(myCol).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            // La consulta se completó exitosamente
-                            QuerySnapshot querySnapshot = task.getResult();
-                            // Lista para almacenar los centros recuperados
-                            // Recorre los documentos en la colección
-                            String nombre, apellidos, email, fechNac, pass;
-                            for (QueryDocumentSnapshot document : querySnapshot) {
-                                // Accede a los datos de cada documento
-                                nombre = document.getString(myNombre);
-                                apellidos = document.getString(myApellidos);
-                                email = document.getString(myEmail);
-                                fechNac = document.getString(myFecha);
-                                pass = document.getString(myPass);
-                            }
-                            Usuario u = new Usuario(nombre, apellidos, email, pass, fechNac);
-                            // Llama al método de la interfaz cuando se hayan recuperado todos los centros
-                            callback.getUsuario(u);
-                        } else {
-                            // Llama al método de la interfaz en caso de error
-                            callback.onError(task.getException());
+
+        SingletonDataBase.getInstance().getDB().collection(myCol)
+                .whereEqualTo("email", mail)
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Usuario u = document.toObject(Usuario.class);
+
+                            // El documento existe, obtén los datos del usuario
+
+
+                            // Haz algo con los datos obtenidos
+                            Log.d("UserProfile", "Datos usuario: " + u.toString());
+                            callback.success(u);
                         }
+                    } else {
+                        // Manejar errores
+                        Log.e("UserProfile", "Error al obtener datos del usuario: " + task.getException().getMessage());
+                        callback.onError(task.getException());
                     }
                 });
-
     }
+
+
+
 
     public void existe(Usuario u, Callback callback){
 
@@ -90,7 +89,8 @@ public class UsuarioDB {
     }
 
     public interface Callback {
-        void getUsuario(Usuario u);
+        void success(Usuario u);
+
         void onCallback(boolean exists);
 
         void onError(Exception e);
