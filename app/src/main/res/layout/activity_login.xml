@@ -48,6 +48,8 @@
             android:hint="@string/editMail"
             app:boxStrokeColor="#CFD8DC"
             app:hintTextColor="#CFD8DC"
+            app:errorTextColor="#FF5722"
+            app:boxStrokeErrorColor="#FF5722"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:textColorHint="#CFD8DC">
 

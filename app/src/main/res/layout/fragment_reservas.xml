@@ -2,24 +2,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_gris"
     tools:context="Presentacion.ReservasFragment">
+
+    <TextView
+        android:id="@+id/tituloReservas"
+        android:text="Centros Deportivos"
+        android:textSize="30dp"
+        android:fontFamily="@font/audiowide"
+        android:textColor="#FFA000"
+        android:padding="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:gravity="center"></TextView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/fondo_gris"
         android:gravity="center">
 
-        <TextView
-            android:id="@+id/tituloReservas"
-            android:text="Centros Deportivos"
-            android:textSize="30dp"
-            android:fontFamily="@font/audiowide"
-            android:textColor="#FFA000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCentros"
