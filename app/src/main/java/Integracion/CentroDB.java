@@ -38,13 +38,13 @@ public class CentroDB {
                             double latitud = numLatitud != null ? numLatitud.doubleValue() : 0.0;
                             double longitud = numLongitud != null ? numLongitud.doubleValue() : 0.0;
                             // Suponiendo que idCampos y localizacion son otros atributos que necesitas
-                            ArrayList<String> idCampos = (ArrayList<String>) document.get("idCampos");
+                            ArrayList<String> idCampos = (ArrayList<String>) document.get("lista");
                             String localizacion = document.getString("localizacion");
 
                             Centro centro = new Centro(nombre, localizacion, idCampos, latitud, longitud);
 
                             // Calcular y establecer la distancia
-                            double distancia = calcularDistancia(40.405858, -3.7467707, latitud, longitud);
+                            double distancia = calcularDistancia(userLat, userLng, latitud, longitud);
                             centro.setDistancia(distancia);
 
                             listaCentros.add(centro);
