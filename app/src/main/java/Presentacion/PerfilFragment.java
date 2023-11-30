@@ -1,13 +1,18 @@
 package Presentacion;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,6 +39,7 @@ public class PerfilFragment extends Fragment {
 
     private TextView mail, nombreApe, fechaNac;
 
+    private Button cierreSesion;
     private FirebaseAuth mAuth;
     public PerfilFragment() {
         // Required empty public constructor
@@ -64,7 +70,9 @@ public class PerfilFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        mAuth=FirebaseAuth.getInstance();
+
+
+
     }
 
     @Override
@@ -74,7 +82,7 @@ public class PerfilFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_perfil, container, false);
         FirebaseUser usuarioActual = FirebaseAuth.getInstance().getCurrentUser();
-
+        mAuth=FirebaseAuth.getInstance();
         mail = rootView.findViewById(R.id.mailUsu);
 
 
@@ -101,11 +109,20 @@ public class PerfilFragment extends Fragment {
 
             }
         });
+
+        cierreSesion = rootView.findViewById(R.id.cierreSesion);
+
+        cierreSesion.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                //OnCLick Stuff
+                Log.d("Cierre de sesion", "Cerrando Sesion");
+                mAuth.signOut();
+
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+        });
         return rootView;
     }
 
-    public void cierreSesion(View v){
 
-        mAuth.signOut();
-    }
 }

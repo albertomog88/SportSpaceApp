@@ -2,6 +2,7 @@ package Presentacion;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,8 @@ public class ReservaAdapter extends RecyclerView.Adapter<ReservaAdapter.ReservaV
         Reserva reserva = listaReservas.get(position);
         holder.textViewNombreCentro.setText(reserva.getCentro());
         holder.textViewFecha.setText(reserva.getFecha() + " " + reserva.getHora());
+        //Log.d("NombreCampoMisReservas", reserva.getNombreCampo());
+        holder.textViewNombreCampo.setText(reserva.getNombreCampo());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +57,7 @@ public class ReservaAdapter extends RecyclerView.Adapter<ReservaAdapter.ReservaV
                 intent.putExtra("fecha", reserva.getFecha());
                 intent.putExtra("hora", reserva.getHora());
                 intent.putExtra("idCampo", reserva.getIdCampo());
-
+                //intent.putExtra("nombreCampo", reserva.getNombreCampo());
                 context.startActivity(intent);
             }
         });
@@ -67,13 +70,14 @@ public class ReservaAdapter extends RecyclerView.Adapter<ReservaAdapter.ReservaV
     }
 
     public class ReservaViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewNombreCentro, textViewFecha;
+        TextView textViewNombreCentro, textViewFecha, textViewNombreCampo;
         // Agrega otros elementos de diseño según tus necesidades
 
         public ReservaViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewNombreCentro = itemView.findViewById(R.id.textViewNombreCentro);
             textViewFecha = itemView.findViewById(R.id.textViewFecha);
+            textViewNombreCampo = itemView.findViewById(R.id.textViewNombreCampo);
             // Inicializa otros elementos de diseño aquí
         }
     }

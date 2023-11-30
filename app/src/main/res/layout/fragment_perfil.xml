@@ -38,7 +38,6 @@
             android:id="@+id/cierreSesion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="cierreSesion"
             android:text="Cerrar Sesion" />
     </LinearLayout>
 </FrameLayout>

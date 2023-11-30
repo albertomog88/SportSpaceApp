@@ -34,7 +34,7 @@ public class RegistroActivity extends AppCompatActivity {
         String nombre = et_nombre.getText().toString();
         String ape1 = et_ape1.getText().toString();
         String ape2 = et_ape2.getText().toString();
-        ape1 += ape2;
+        ape1 +=" "+ ape2;
         String fecha = et_fechNac.getText().toString();
         String email = et_correo.getText().toString();
         String pass = et_passw.getText().toString();

@@ -85,7 +85,7 @@ public class MisReservasFragment extends Fragment {
         listaReservas = new ArrayList<>();
         reservaAdapter = new ReservaAdapter(listaReservas, getContext());
         recyclerViewReservas.setAdapter(reservaAdapter);
-        int spaceInPixels = 10; // Ajusta esto según tus necesidades
+        int spaceInPixels = 40; // Ajusta esto según tus necesidades
         recyclerViewReservas.addItemDecoration(new SpacesItemDecoration(spaceInPixels));
 
         // Llama a la función obtenerCentros y actualiza el adaptador cuando se complete la consulta

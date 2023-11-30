@@ -7,13 +7,15 @@ public class Reserva {
     private String hora;
     private String idCampo;
     private String centro;
+    private String nombreCampo;
     private ReservaBD rBD;
 
-    public Reserva(String fecha, String hora, String idCampo, String centro) {
+    public Reserva(String fecha, String hora, String idCampo, String centro, String nombreCampo) {
         this.fecha = fecha;
         this.hora = hora;
         this.idCampo = idCampo;
         this.centro = centro;
+        this.nombreCampo = nombreCampo;
         this.rBD = new ReservaBD();
     }
 
@@ -60,4 +62,9 @@ public class Reserva {
     public void setCentro(String centro) {
         this.centro = centro;
     }
+
+    public String getNombreCampo() { return nombreCampo;}
+
+    public void setNombreCampo(String nombreCampo){ this.nombreCampo = nombreCampo;   }
+
 }
