@@ -8,12 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@drawable/fondo_gris"
         android:gravity="center">
 
         <TextView
             android:id="@+id/tituloReservas"
             android:text="Centros Deportivos"
             android:textSize="30dp"
+            android:fontFamily="@font/audiowide"
+            android:textColor="#FFA000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
