@@ -35,6 +35,7 @@ public class CentroAdapter extends RecyclerView.Adapter<CentroAdapter.CentroView
     public void onBindViewHolder(@NonNull CentroViewHolder holder, int position) {
         Centro centro = listaCentros.get(position);
         holder.textViewNombre.setText(centro.getNombre());
+        holder.textViewDistancia.setText(String.valueOf(centro.getDistancia()+ " km"));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,11 +55,13 @@ public class CentroAdapter extends RecyclerView.Adapter<CentroAdapter.CentroView
 
     public class CentroViewHolder extends RecyclerView.ViewHolder {
         TextView textViewNombre;
+        TextView textViewDistancia;
         // Agrega otros elementos de diseño según tus necesidades
 
         public CentroViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewNombre = itemView.findViewById(R.id.textViewNombre);
+            textViewDistancia = itemView.findViewById(R.id.textViewDistancia);
             // Inicializa otros elementos de diseño aquí
         }
     }
