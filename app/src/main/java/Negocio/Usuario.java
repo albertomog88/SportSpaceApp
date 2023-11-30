@@ -1,5 +1,6 @@
 package Negocio;
 
+import Integracion.ReservaBD;
 import Integracion.UsuarioDB;
 
 public class Usuario {
@@ -9,6 +10,10 @@ public class Usuario {
     private String pass;
     private String fecha;
     private static UsuarioDB uDB;
+
+    public Usuario (){
+        this.uDB = new UsuarioDB();
+    }
     public Usuario (String nombre, String apellidos, String email, String pass, String fecha){
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -18,6 +23,9 @@ public class Usuario {
         uDB = new UsuarioDB();
     }
 
+    public void getUsuario(String mail, UsuarioDB.Callback callback){
+        uDB.getUsuario(mail, callback);
+    }
 
     public boolean guardar(){
         return uDB.guardar(this);
@@ -44,5 +52,9 @@ public class Usuario {
 
     public String getFecha() {
         return fecha;
+    }
+
+    public String toString() {
+        return this.email+" "+this.nombre+" "+this.apellidos+" "+this.fecha+" "+this.pass;
     }
 }

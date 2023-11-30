@@ -1,5 +1,7 @@
 package Integracion;
 
+import android.util.Log;
+
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -45,6 +47,22 @@ public class ReservaBD {
                                                 // Suponiendo que el nombre del centro está en un campo llamado "nombre"
                                                 String nombreCentro = docCentro.getString("nombre");
                                                 reserva.setCentro(nombreCentro);
+
+                                                SingletonDataBase.getInstance().getDB().collection("Campos")
+                                                        .whereEqualTo("id", idCampo)
+                                                        .get()
+                                                        .addOnCompleteListener(taskNombreCampo -> {
+                                                                    if (taskCentro.isSuccessful()) {
+                                                                        for (QueryDocumentSnapshot docCampo : taskCentro.getResult()) {
+                                                                            Campo c = docCampo.toObject(Campo.class);
+                                                                            reserva.setNombreCampo(c.getNombre());
+                                                                            Log.d("ReservaDatos", reserva.getNombreCampo() + " ID: " + reserva.getIdCampo());
+                                                                        }
+
+
+                                                                    }});
+
+
                                             }
                                         }
                                         reservas.add(reserva);
@@ -60,6 +78,8 @@ public class ReservaBD {
                     }
                 });
     }
+
+
 
     public void eliminarReserva(String idUsuario, String idCampo, String fecha, String hora) {
 

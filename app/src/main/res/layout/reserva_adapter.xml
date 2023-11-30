@@ -18,4 +18,11 @@
         android:textSize="20sp"
         android:text="27/11/2023" />
 
+    <TextView
+        android:id="@+id/textViewNombreCampo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NombreCampo"
+        android:textSize="20sp" />
+
 </LinearLayout>

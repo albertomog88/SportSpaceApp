@@ -103,12 +103,24 @@ public class RegistroActivity extends AppCompatActivity {
         String nombre = et_nombre.getText().toString();
         String ape1 = et_ape1.getText().toString();
         String ape2 = et_ape2.getText().toString();
-        ape1 += " " +ape2;
+        ape1 +=" "+ ape2;
         String fecha = et_fechNac.getText().toString();
         String email = et_correo.getText().toString();
         String pass = et_passw.getText().toString();
         String pass2 = et_passw2.getText().toString();
 
+        u.existe(new UsuarioDB.Callback() {
+            @Override
+            public void success(Usuario u){
+
+            }
+
+            @Override
+            public void onCallback(boolean exists) {
+                if (!exists) {
+                    // Usuario no existe, proceder con el registro
+                    u.guardar();
+                    Toast.makeText(RegistroActivity.this, "Registro exitoso", Toast.LENGTH_LONG).show();
 
         if(validarCampos(nombre, ape1, ape2, fecha, email, pass, pass2)) {
 
@@ -192,6 +204,13 @@ public class RegistroActivity extends AppCompatActivity {
         Matcher matcher = pattern.matcher(contraseña);
 
         return matcher.matches();
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
     }
 
     private void Vaciar(){
