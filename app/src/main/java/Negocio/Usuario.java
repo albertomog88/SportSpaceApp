@@ -8,7 +8,7 @@ public class Usuario {
     private String apellidos;
     private String email;
     private String pass;
-    private String fecha;
+    private String fechaNacimiento;
     private static UsuarioDB uDB;
 
     public Usuario (){
@@ -19,7 +19,7 @@ public class Usuario {
         this.apellidos = apellidos;
         this.email = email;
         this.pass = pass;
-        this.fecha = fecha;
+        this.fechaNacimiento = fecha;
         uDB = new UsuarioDB();
     }
 
@@ -51,10 +51,14 @@ public class Usuario {
     }
 
     public String getFecha() {
-        return fecha;
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String toString() {
-        return this.email+" "+this.nombre+" "+this.apellidos+" "+this.fecha+" "+this.pass;
+        return this.email+" "+this.nombre+" "+this.apellidos+" "+this.fechaNacimiento+" "+this.pass;
     }
 }

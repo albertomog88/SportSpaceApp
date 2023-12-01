@@ -58,7 +58,7 @@ public class UsuarioDB {
 
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Usuario u = document.toObject(Usuario.class);
-
+                            u.setFechaNacimiento(document.getString(myFecha));
                             // El documento existe, obtén los datos del usuario
 
 
