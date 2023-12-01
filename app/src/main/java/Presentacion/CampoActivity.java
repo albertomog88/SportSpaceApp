@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,8 +32,8 @@ import es.ucm.fdi.sportspaceapp.R;
 
 public class CampoActivity extends AppCompatActivity {
 
-    private TextView tituloCampo;
-    private TextView fecha;
+    private TextView tituloCampo, fecha, disponibles;
+
     private Button reservarButton;
     private RecyclerView recyclerView;
     private HorarioAdapter horarioAdapter;
@@ -39,12 +41,16 @@ public class CampoActivity extends AppCompatActivity {
     private Campo campo;
     private String idCampo;
 
+    private FirebaseUser usuarioActual ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campo);
+
         Intent intent = getIntent();
         String nombreCampo = getIntent().getStringExtra("nombre_campo");
+        usuarioActual = FirebaseAuth.getInstance().getCurrentUser();
         idCampo = getIntent().getStringExtra("id_campo"); // Asignar a la variable idCampo
         reservarButton = findViewById(R.id.butttonReservar);
         reservarButton.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +63,9 @@ public class CampoActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         tituloCampo = findViewById(R.id.tituloCampo);
         tituloCampo.setText(nombreCampo);
+
+
+
 
         fecha = findViewById(R.id.fechaCampo); // Asegúrate de que este ID exista en tu layout
         fecha.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +80,11 @@ public class CampoActivity extends AppCompatActivity {
         fecha.setText(fechaActual);
         // Aquí deberías obtener tu lista de horarios de alguna forma
         listaHorarios = new ArrayList<Horario>(); // Implementa este método
+
+        disponibles = findViewById(R.id.tituloHorario);
+
+
+
         horarioAdapter = new HorarioAdapter(listaHorarios, this);
         recyclerView.setAdapter(horarioAdapter);
         campo = new Campo();
@@ -95,6 +109,7 @@ public class CampoActivity extends AppCompatActivity {
                 });
                 listaHorarios.clear();
                 listaHorarios.addAll(horarios);
+                disponibles.setText("Numero de horas disponibles "+listaHorarios.size());
                 horarioAdapter.notifyDataSetChanged();
             }
 
@@ -113,13 +128,32 @@ public class CampoActivity extends AppCompatActivity {
 
 
     public void toReservar() {
-        FirebaseUser usuarioActual = FirebaseAuth.getInstance().getCurrentUser();
-        String email = usuarioActual.getEmail();
-        List<Horario> horariosSeleccionados = horarioAdapter.obtenerHorariosSeleccionados();
-        campo.insertarReserva(email, idCampo, fecha.getText().toString(), horariosSeleccionados);
-        //campo.actualizarDisponibilidad(idCampo, fecha.getText().toString(), horariosSeleccionados);
-        finish();
+
+
+
+        //Controlamos que el usuario este logeado
+        if(usuarioActual != null){
+            String email = usuarioActual.getEmail();
+            List<Horario> horariosSeleccionados = horarioAdapter.obtenerHorariosSeleccionados();
+            String horas="";
+            for (Horario elemento : horariosSeleccionados) {
+                horas+=elemento.getHora()+ " ";
+            }
+            showDialog("Resera realizada con exito",
+                    "Usuario: "+email+"\n"+
+                            tituloCampo.getText().toString()+"\n"+
+                            "Fecha: "+fecha.getText().toString()+"\n"+
+                            "Horas: "+horas);
+
+        }
+        else{
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+
     }
+
+
 
     private void actualizarListaHorarios(String idCampo, String fecha) {
         campo.verificarYActualizarDisponibilidad(idCampo, fecha, new CampoDB.Callback() {
@@ -162,7 +196,29 @@ public class CampoActivity extends AppCompatActivity {
                         actualizarListaHorarios(idCampo, fechaSeleccionada);
                     }
                 }, year, month, day);
+        //Evitamos que pueda reservar en una fecha anterior que la actual.
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
         datePickerDialog.show();
+    }
+
+    private void showDialog(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Código a ejecutar cuando se hace clic en el botón "Aceptar"String email = ;
+                        campo.insertarReserva(usuarioActual.getEmail(), idCampo, fecha.getText().toString(), horarioAdapter.obtenerHorariosSeleccionados());
+                        finish();
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Código a ejecutar cuando se hace clic en el botón "Cancelar"
+                        finish();
+                    }
+                })
+                .show();
     }
 }

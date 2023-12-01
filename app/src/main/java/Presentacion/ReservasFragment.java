@@ -1,13 +1,25 @@
 package Presentacion;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+
 import Integracion.CentroDB;
 import Negocio.Centro;
 import es.ucm.fdi.sportspaceapp.R;
@@ -28,9 +40,14 @@ public class ReservasFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private Long longitud, latitud;
+
     private RecyclerView recyclerViewCentros;
+    private Centro centro;
     private CentroAdapter centroAdapter;
     private ArrayList<Centro> listaCentros;
+    private FusedLocationProviderClient fusedLocationClient;
+    private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
     public ReservasFragment() {
         // Required empty public constructor
@@ -57,9 +74,47 @@ public class ReservasFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Inicializar FusedLocationProviderClient
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+    private void obtenerUbicacionYCentros() {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(getActivity(), location -> {
+                        if (location != null) {
+                            double latitud = location.getLatitude();
+                            double longitud = location.getLongitude();
+
+                            // Ahora llama a obtenerCentros
+                            centro.obtenerCentros(latitud, longitud, new CentroDB.CentroCallback() {
+                                @Override
+                                public void onCentrosObtenidos(ArrayList<Centro> centros) {
+                                    // Actualiza la lista de centros y notifica al adaptador
+                                    listaCentros.clear();
+                                    listaCentros.addAll(centros);
+                                    centroAdapter.notifyDataSetChanged();
+                                }
+
+                                @Override
+                                public void onError(Exception e) {
+                                    // Maneja errores aquí
+                                }
+                            });
+                        } else {
+                            // Manejar caso donde location == null
+                        }
+                    })
+                    .addOnFailureListener(getActivity(), e -> {
+                        // Manejar fallo al obtener la ubicación
+                    });
+        } else {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
 
@@ -68,7 +123,12 @@ public class ReservasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_reservas, container, false);
-
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
         // Configurar el RecyclerView
         recyclerViewCentros = rootView.findViewById(R.id.recyclerViewCentros);
         recyclerViewCentros.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -78,22 +138,26 @@ public class ReservasFragment extends Fragment {
         recyclerViewCentros.setAdapter(centroAdapter);
 
         // Llama a la función obtenerCentros y actualiza el adaptador cuando se complete la consulta
-        Centro centro = new Centro();
-        centro.obtenerCentros(new CentroDB.CentroCallback() {
-            @Override
-            public void onCentrosObtenidos(ArrayList<Centro> centros) {
-                // Actualiza la lista de centros y notifica al adaptador
-                listaCentros.clear();
-                listaCentros.addAll(centros);
-                centroAdapter.notifyDataSetChanged();
-            }
+        centro = new Centro();
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.getContext());
 
-            @Override
-            public void onError(Exception e) {
-                // Maneja errores aquí
-            }
-        });
+        // Asegúrate de que tienes los permisos antes de llamar a obtenerUbicacionYCentros
+        obtenerUbicacionYCentros();
 
         return rootView;
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // El permiso fue concedido, puedes hacer la operación que requiere el permiso
+                obtenerUbicacionYCentros();
+            } else {
+                // El permiso fue denegado, maneja adecuadamente la negación de este permiso
+            }
+        }
+    }
+
 }

@@ -199,6 +199,7 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     public void toInicio(View v){
+        finish();
         startActivity(new Intent(this, LoginActivity.class));
 
     }

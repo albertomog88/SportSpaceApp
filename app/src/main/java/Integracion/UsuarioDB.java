@@ -42,9 +42,10 @@ public class UsuarioDB {
         return true;
     }
 
+
     public void existe(Usuario u, Callback callback){
-        String id = u.getEmail();
-        DocumentReference docRef = SingletonDataBase.getInstance().getDB().collection(myCol).document(id);
+
+        DocumentReference docRef = SingletonDataBase.getInstance().getDB().collection(myCol).document(u.getEmail());
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {

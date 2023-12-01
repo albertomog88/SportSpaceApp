@@ -52,6 +52,7 @@ public class VerDetallesReservaActivity extends AppCompatActivity {
                 String idCampo = intent.getStringExtra("idCampo");
                 String hora = intent.getStringExtra("hora");
                 reserva.eliminarReserva(idUsuario, idCampo, fecha, hora);
+                finish();
             }
         });
     }
