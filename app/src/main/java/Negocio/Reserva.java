@@ -63,7 +63,7 @@ public class Reserva {
         this.centro = centro;
     }
 
-    public String getNombreCampo() { return nombreCampo;}
+    public String getNombreCampo() { return this.nombreCampo;}
 
     public void setNombreCampo(String nombreCampo){ this.nombreCampo = nombreCampo;   }
 

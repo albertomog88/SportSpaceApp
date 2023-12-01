@@ -8,6 +8,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import Negocio.Campo;
 import Negocio.Horario;
@@ -25,14 +26,16 @@ public class ReservaBD {
 
         void onError(Exception e);
     }
-    public void obtenerReservas(String idUsuario, Callback callback){
-
+    public void obtenerReservas(String idUsuario, Callback callback) {
         SingletonDataBase.getInstance().getDB().collection("Reservas")
                 .whereEqualTo("idUsuario", idUsuario)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         List<Reserva> reservas = new ArrayList<>();
+                        int totalReservas = task.getResult().size();
+                        AtomicInteger reservasProcesadas = new AtomicInteger(0);
+
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Reserva reserva = document.toObject(Reserva.class);
                             String idCampo = reserva.getIdCampo();
@@ -42,35 +45,27 @@ public class ReservaBD {
                                     .whereArrayContains("lista", idCampo)
                                     .get()
                                     .addOnCompleteListener(taskCentro -> {
-                                        if (taskCentro.isSuccessful()) {
-                                            for (QueryDocumentSnapshot docCentro : taskCentro.getResult()) {
-                                                // Suponiendo que el nombre del centro está en un campo llamado "nombre"
-                                                String nombreCentro = docCentro.getString("nombre");
-                                                reserva.setCentro(nombreCentro);
-
-                                                SingletonDataBase.getInstance().getDB().collection("Campos")
-                                                        .whereEqualTo("id", idCampo)
-                                                        .get()
-                                                        .addOnCompleteListener(taskNombreCampo -> {
-                                                                    if (taskCentro.isSuccessful()) {
-                                                                        for (QueryDocumentSnapshot docCampo : taskCentro.getResult()) {
-                                                                            Campo c = docCampo.toObject(Campo.class);
-                                                                            reserva.setNombreCampo(c.getNombre());
-                                                                            Log.d("ReservaDatos", reserva.getNombreCampo() + " ID: " + reserva.getIdCampo());
-                                                                        }
-
-
-                                                                    }});
-
-
-                                            }
+                                        if (taskCentro.isSuccessful() && !taskCentro.getResult().isEmpty()) {
+                                            QueryDocumentSnapshot docCentro = (QueryDocumentSnapshot) taskCentro.getResult().getDocuments().get(0);
+                                            String nombreCentro = docCentro.getString("nombre");
+                                            reserva.setCentro(nombreCentro);
                                         }
-                                        reservas.add(reserva);
 
-                                        // Llama al callback cuando todas las reservas han sido procesadas
-                                        if (reservas.size() == task.getResult().size()) {
-                                            callback.onSuccess((ArrayList<Reserva>) reservas);
-                                        }
+                                        // Consulta adicional para obtener el nombre del campo
+                                        SingletonDataBase.getInstance().getDB().collection("Campos")
+                                                .whereEqualTo("id", idCampo)
+                                                .get()
+                                                .addOnCompleteListener(taskNombreCampo -> {
+                                                    if (taskNombreCampo.isSuccessful() && !taskNombreCampo.getResult().isEmpty()) {
+                                                        QueryDocumentSnapshot docCampo = (QueryDocumentSnapshot) taskNombreCampo.getResult().getDocuments().get(0);
+                                                        reserva.setNombreCampo(docCampo.getString("nombre"));
+                                                    }
+
+                                                    reservas.add(reserva);
+                                                    if (reservasProcesadas.incrementAndGet() == totalReservas) {
+                                                        callback.onSuccess((ArrayList<Reserva>) reservas);
+                                                    }
+                                                });
                                     });
                         }
                     } else {
@@ -78,6 +73,7 @@ public class ReservaBD {
                     }
                 });
     }
+
 
 
 
