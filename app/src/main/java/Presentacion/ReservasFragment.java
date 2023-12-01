@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -94,8 +95,7 @@ public class ReservasFragment extends Fragment {
                                 @Override
                                 public void onCentrosObtenidos(ArrayList<Centro> centros) {
                                     // Actualiza la lista de centros y notifica al adaptador
-                                    listaCentros.clear();
-                                    listaCentros.addAll(centros);
+                                    centroAdapter.setListaCentros(centros);
                                     centroAdapter.notifyDataSetChanged();
                                 }
 
@@ -129,6 +129,20 @@ public class ReservasFragment extends Fragment {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
+        SearchView searchView = rootView.findViewById(R.id.search_view);
+        // Configurar SearchView
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                centroAdapter.getFilter().filter(newText);
+                return true;
+            }
+        });
         // Configurar el RecyclerView
         recyclerViewCentros = rootView.findViewById(R.id.recyclerViewCentros);
         recyclerViewCentros.setLayoutManager(new LinearLayoutManager(getActivity()));
