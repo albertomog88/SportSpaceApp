@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_gris"
     tools:context="Presentacion.CentroActivity">
 
     <LinearLayout
@@ -24,12 +25,15 @@
             android:id="@+id/tituloCampos"
             android:text="Campos"
             android:textSize="30dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:fontFamily="@font/audiowide"
+            android:textColor="@color/ambar"
+            android:layout_marginBottom="10dp"
+            android:gravity="center" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCampos"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="40dp" />
     </LinearLayout>

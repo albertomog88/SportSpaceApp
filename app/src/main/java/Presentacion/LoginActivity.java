@@ -20,7 +20,6 @@ import es.ucm.fdi.sportspaceapp.R;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText et_email, et_pass;
-    private CheckBox showPasswordCheckBox;
     private FirebaseAuth auth;
     private FirebaseUser currentUser;
     @Override
@@ -30,21 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         et_email = findViewById(R.id.ed_email);
         et_pass = findViewById(R.id.ed_pass);
-        showPasswordCheckBox = findViewById(R.id.checkBoxShowPassword);
 
-        showPasswordCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Cambiar la visibilidad de la contraseña según el estado del CheckBox
-                if (isChecked) {
-                    // Hacer la contraseña visible
-                    et_pass.setTransformationMethod(null);
-                } else {
-                    // Ocultar la contraseña
-                    et_pass.setTransformationMethod(new PasswordTransformationMethod());
-                }
-            }
-        });
         currentUser = auth.getCurrentUser();
 
         if(currentUser != null){

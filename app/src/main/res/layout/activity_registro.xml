@@ -1,169 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/fondo_gris"
     tools:context="Presentacion.RegistroActivity">
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="331dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="190dp"
-        android:onClick="toInicio"
-        android:text="@string/txtInicioSesion"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
-
-    <EditText
-        android:id="@+id/ed_correo"
-        android:layout_width="331dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="12dp"
-        android:ems="10"
-        android:hint="@string/editCorreo"
-        android:inputType="textEmailAddress"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/ed_pass"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_fechNac" />
-
-    <EditText
-        android:id="@+id/ed_pass"
-        android:layout_width="220dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="17dp"
-        android:ems="10"
-        android:hint="@string/editPass"
-        android:inputType="textPassword"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/ed_pass2"
-        app:layout_constraintEnd_toStartOf="@+id/checkVerPass"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_correo" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="331dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:onClick="Registrar"
-        android:text="@string/btnRegistro"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_pass2" />
-
-    <EditText
-        android:id="@+id/ed_fechNac"
-        android:layout_width="331dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="12dp"
-        android:ems="10"
-        android:hint="@string/editFechaNac"
-        android:inputType="date"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/ed_correo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_ape2" />
-
-    <EditText
-        android:id="@+id/ed_ape1"
-        android:layout_width="331dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="12dp"
-        android:ems="10"
-        android:hint="@string/editApellido1"
-        android:inputType="text"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/ed_ape2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_nombre" />
-
-    <CheckBox
-        android:id="@+id/checkVerPass"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:text="@string/checkVer"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/ed_pass2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ed_pass"
-        app:layout_constraintTop_toBottomOf="@+id/ed_correo"
-        app:layout_constraintVertical_bias="0.0" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/ed_pass2"
-        android:layout_width="331dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:hint="@string/editPassword2"
-        android:inputType="text"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_pass" />
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/TitulosGenericos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/audiowide"
+            android:gravity="center"
+            android:text="@string/txtRegistro"
+            />
 
-    <EditText
-        android:id="@+id/ed_ape2"
-        android:layout_width="331dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="13dp"
-        android:ems="10"
-        android:hint="@string/editApellido2"
-        android:inputType="text"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/ed_fechNac"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_ape1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="22dp"
-        android:text="@string/txtRegistro"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/ed_nombre"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView"
+                android:hint="@string/editNombre"
+                app:boxStrokeColor="#CFD8DC"
+                app:hintTextColor="#CFD8DC"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:textColorHint="#CFD8DC">
 
-    <EditText
-        android:id="@+id/ed_nombre"
-        android:layout_width="331dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="94dp"
-        android:ems="10"
-        android:hint="@string/editNombre"
-        android:inputType="text"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_nombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#CFD8DC"
+                    android:inputType="text"
+                    />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView"
+                android:hint="@string/editApellido1"
+                app:boxStrokeColor="#CFD8DC"
+                app:hintTextColor="#CFD8DC"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:textColorHint="#CFD8DC">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_ape1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#CFD8DC"
+                    android:inputType="text"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView"
+                android:hint="@string/editApellido2"
+                app:boxStrokeColor="#CFD8DC"
+                app:hintTextColor="#CFD8DC"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:textColorHint="#CFD8DC">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_ape2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#CFD8DC"
+                    android:inputType="text"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView"
+                android:hint="@string/editFechaNac"
+                app:boxStrokeColor="#CFD8DC"
+                app:hintTextColor="#CFD8DC"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:textColorHint="#CFD8DC">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_fechNac"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#CFD8DC"
+                    android:inputType="date"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView"
+                android:hint="@string/editCorreo"
+                app:boxStrokeColor="#CFD8DC"
+                app:hintTextColor="#CFD8DC"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:textColorHint="#CFD8DC">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_correo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#CFD8DC"
+                    android:inputType="textEmailAddress"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView"
+                android:hint="@string/editPass"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:passwordToggleEnabled="true"
+                app:boxStrokeColor="#CFD8DC"
+                app:hintTextColor="#CFD8DC"
+                android:textColorHint="#CFD8DC">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="#CFD8DC"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView"
+                android:hint="@string/editPassword2"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:passwordToggleEnabled="true"
+                app:boxStrokeColor="#CFD8DC"
+                app:hintTextColor="#CFD8DC"
+                android:textColorHint="#CFD8DC">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_pass2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="#CFD8DC"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/amiko_bold"
+                android:text="@string/btnRegistro"
+                android:textColor="#455A64"
+                android:textSize="25dp"
+                android:onClick="Registrar"
+                app:backgroundTint="#FFC107"></Button>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/txtCuentaYaCreada"
+                android:textColor="#CFD8DC"
+                android:textSize="15dp"
+                android:id="@+id/TextYaRegistrado"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/txtInicioSesion"
+                android:fontFamily="@font/amiko_bold"
+                android:textSize="25dp"
+                android:textColor="#455A64"
+                android:onClick="toInicio"
+                android:id="@+id/button4"
+                app:backgroundTint="#CFD8DC"></Button>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
