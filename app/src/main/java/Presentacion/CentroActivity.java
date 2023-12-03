@@ -31,7 +31,7 @@ public class CentroActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String nombreCentro = getIntent().getStringExtra("centro");
         ArrayList<String> camposID = getIntent().getStringArrayListExtra("camposID");
-        tituloCentro = findViewById(R.id.tituloCentro);
+        tituloCentro = findViewById(R.id.tituloCampos);
         recyclerViewCampos = findViewById(R.id.recyclerViewCampos);
 
         // Configurar el RecyclerView

@@ -10,13 +10,15 @@
     <!-- Apariencia del texto para elementos activos en la BottomNavigationView -->
     <style name="BottomNavigationViewActiveTextAppearance" parent="TextAppearance.MaterialComponents.Caption">
         <item name="android:textSize">14sp</item> <!-- Tamaño del texto activo -->
-        <item name="android:textColor">@color/white</item> <!-- Color del texto activo, define este color en colors.xml -->
+        <item name="itemTextColor">@color/buttonsTextColor</item> <!-- Color del texto activo, define este color en colors.xml -->
+        <item name="itemIconTint">@color/buttonsTextColor</item>
     </style>
 
     <!-- Apariencia del texto para elementos inactivos en la BottomNavigationView -->
     <style name="BottomNavigationViewInactiveTextAppearance" parent="TextAppearance.MaterialComponents.Caption">
         <item name="android:textSize">14sp</item> <!-- Tamaño del texto inactivo -->
-        <item name="android:textColor">@color/white</item> <!-- Color del texto inactivo, define este color en colors.xml -->
+        <item name="itemTextColor">@color/ambar</item> <!-- Color del texto inactivo, define este color en colors.xml -->
+        <item name="itemIconTint">@color/ambar</item>
     </style>
 
     <!-- Apariencia del texto para el nombre de la app -->

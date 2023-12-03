@@ -33,7 +33,7 @@
                     android:id="@+id/nombreCampo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre del Centro"
+                    android:text="Nombre del Campo"
                     android:textSize="15sp"
                     android:textColor="#455A64"
                     android:fontFamily="@font/amiko_bold" />

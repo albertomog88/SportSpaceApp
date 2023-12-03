@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_gris"
     tools:context="Presentacion.CampoActivity">
 
     <LinearLayout
@@ -15,44 +16,60 @@
         <TextView
             android:id="@+id/tituloCampo"
             android:text="Titulo Campo"
-            android:textSize="33dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="25dp"
+            android:textColor="#CFD8DC"
+            android:fontFamily="@font/amiko"
             android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/tituloFecha"
             android:text="Fecha seleccionada"
             android:textSize="25dp"
+            android:fontFamily="@font/amiko"
+            android:textColor="#CFD8DC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/fechaCampo"
             android:text="Titulo Campo"
             android:textSize="25dp"
+            android:fontFamily="@font/amiko"
+            android:textColor="#CFD8DC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/tituloHorario"
             android:text="Horas Disponibles"
-            android:textSize="20dp"
+            android:textSize="30dp"
+            android:fontFamily="@font/audiowide"
+            android:textColor="#FFA000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewHorarios"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="30dp" />
         <Button
             android:id="@+id/butttonReservar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:backgroundTint="#FFC107"
+            android:textColor="#455A64"
+            android:textSize="25dp"
+            android:fontFamily="@font/amiko_bold"
             android:text="Reservar"
             android:onClick="toReservar">
 

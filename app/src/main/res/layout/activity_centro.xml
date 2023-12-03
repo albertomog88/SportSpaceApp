@@ -14,25 +14,19 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/tituloCentro"
-            android:text=""
-            android:textSize="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
-        <TextView
             android:id="@+id/tituloCampos"
             android:text="Campos"
             android:textSize="30dp"
             android:fontFamily="@font/audiowide"
             android:textColor="#FFA000"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCampos"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="40dp" />
     </LinearLayout>

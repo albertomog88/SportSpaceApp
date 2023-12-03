@@ -5,4 +5,7 @@
     <color name="Lavender">#8692f7</color>
     <color name="blue">#FF0000FF</color>
     <color name="navBarBackground">#FF6200EE</color>
+    <color name="ambar">#FFA000</color>
+    <color name="buttonsTextColor">#455A64</color>
+    <color name="lightBlue">#CFD8DC</color>
 </resources>
