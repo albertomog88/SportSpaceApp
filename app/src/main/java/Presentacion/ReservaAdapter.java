@@ -57,7 +57,7 @@ public class ReservaAdapter extends RecyclerView.Adapter<ReservaAdapter.ReservaV
                 intent.putExtra("fecha", reserva.getFecha());
                 intent.putExtra("hora", reserva.getHora());
                 intent.putExtra("idCampo", reserva.getIdCampo());
-                //intent.putExtra("nombreCampo", reserva.getNombreCampo());
+                intent.putExtra("nombreCampo", reserva.getNombreCampo());
                 context.startActivity(intent);
             }
         });

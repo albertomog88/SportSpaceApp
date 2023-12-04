@@ -25,14 +25,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/textViewNombre_Campo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amiko_bold"
+            android:text="Nombre Campo"
             android:textColor="@color/lightBlue"
-            android:text="TextView"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <TextView
         android:id="@+id/textViewFechaDetalles"

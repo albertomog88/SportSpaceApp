@@ -22,6 +22,8 @@ public class VerDetallesReservaActivity extends AppCompatActivity {
     private String nombreCentro;
     private String fecha;
     private String hora;
+
+    private String nombreCampo;
     private Reserva reserva;
 
     @Override
@@ -34,13 +36,15 @@ public class VerDetallesReservaActivity extends AppCompatActivity {
         nombreCentro = intent.getStringExtra(EXTRA_NOMBRE_CENTRO);
         fecha = intent.getStringExtra(EXTRA_FECHA);
         hora = intent.getStringExtra("hora");
+        nombreCampo = intent.getStringExtra("nombreCampo");
 
         // Configurar las vistas
         TextView textViewNombreCentro = findViewById(R.id.textViewNombreCentroDetalles);
         TextView textViewFecha = findViewById(R.id.textViewFechaDetalles);
-
+        TextView textViewNombreCampo = findViewById(R.id.textViewNombre_Campo);
         textViewNombreCentro.setText(nombreCentro);
         textViewFecha.setText(fecha + " - " + hora);
+        textViewNombreCampo.setText(nombreCampo);
         reserva = new Reserva();
         // Configurar el botón para cancelar la reserva
         Button btnCancelar = findViewById(R.id.btnCancelarReserva);
