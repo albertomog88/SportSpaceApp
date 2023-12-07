@@ -27,9 +27,10 @@
     <string name="equipos">Equipos</string>
     <string name="perfil">Perfil</string>
 
-    <string name="txtIncio">Inicio</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    //Vista Campo
+    <string name="txtHoras">Horas Disponibles: </string>
 
+    //Vista Inicio
+    <string name="txtIncio">Inicio</string>
 
 </resources>

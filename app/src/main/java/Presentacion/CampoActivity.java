@@ -3,7 +3,6 @@ package Presentacion;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -13,10 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,23 +22,19 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-
 import Integracion.CampoDB;
 import Negocio.Campo;
 import Negocio.Horario;
 import es.ucm.fdi.sportspaceapp.R;
 
 public class CampoActivity extends AppCompatActivity {
-
     private TextView tituloCampo, fecha, disponibles;
-
     private Button reservarButton;
     private RecyclerView recyclerView;
     private HorarioAdapter horarioAdapter;
     private ArrayList<Horario> listaHorarios;
     private Campo campo;
     private String idCampo;
-
     private FirebaseUser usuarioActual ;
 
     @Override
@@ -63,10 +57,6 @@ public class CampoActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         tituloCampo = findViewById(R.id.tituloCampo);
         tituloCampo.setText(nombreCampo);
-
-
-
-
         fecha = findViewById(R.id.fechaCampo); // Asegúrate de que este ID exista en tu layout
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,16 +72,11 @@ public class CampoActivity extends AppCompatActivity {
         listaHorarios = new ArrayList<Horario>(); // Implementa este método
 
         disponibles = findViewById(R.id.tituloHorario);
-
-
-
         horarioAdapter = new HorarioAdapter(listaHorarios, this);
         recyclerView.setAdapter(horarioAdapter);
         campo = new Campo();
 
         campo.verificarYActualizarDisponibilidad(idCampo, fechaActual, new CampoDB.Callback() {
-
-
             @Override
             public void success(List<Horario> horarios) {
                 Collections.sort(horarios, new Comparator<Horario>() {
@@ -109,27 +94,21 @@ public class CampoActivity extends AppCompatActivity {
                 });
                 listaHorarios.clear();
                 listaHorarios.addAll(horarios);
-                disponibles.setText("Numero de horas disponibles "+listaHorarios.size());
+                disponibles.setText(getString(R.string.txtHoras) + listaHorarios.size());
                 horarioAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onSuccess(ArrayList<Campo> campos) {
-
             }
-
-
             @Override
             public void onError(Exception e) {
-                // Maneja errores aquí
+                Toast.makeText(CampoActivity.this,"Ha habido un error al generar los horarios disponibles",Toast.LENGTH_LONG).show();
             }
         });
     }
 
-
     public void toReservar() {
-
-
 
         //Controlamos que el usuario este logeado
         if(usuarioActual != null){
@@ -139,21 +118,17 @@ public class CampoActivity extends AppCompatActivity {
             for (Horario elemento : horariosSeleccionados) {
                 horas+=elemento.getHora()+ " ";
             }
-            showDialog("Resera realizada con exito",
+            showDialog("Reserva realizada con exito",
                     "Usuario: "+email+"\n"+
                             tituloCampo.getText().toString()+"\n"+
                             "Fecha: "+fecha.getText().toString()+"\n"+
                             "Horas: "+horas);
-
         }
         else{
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
-
     }
-
-
 
     private void actualizarListaHorarios(String idCampo, String fecha) {
         campo.verificarYActualizarDisponibilidad(idCampo, fecha, new CampoDB.Callback() {
@@ -166,12 +141,11 @@ public class CampoActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(ArrayList<Campo> campos) {
-                // No necesario para este caso
             }
 
             @Override
             public void onError(Exception e) {
-                // Maneja errores aquí
+                Toast.makeText(CampoActivity.this,"Ha habido un error al generar los horarios disponibles",Toast.LENGTH_LONG).show();
             }
         });
     }

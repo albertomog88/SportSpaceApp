@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Bienvenido "+currentUser.getEmail(), Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(LoginActivity.this, "Usuario no logeado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Usuario no logueado", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -77,9 +77,5 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         auth.signOut();
-    }
-
-    public FirebaseAuth getAuth(){
-        return this.auth;
     }
 }
