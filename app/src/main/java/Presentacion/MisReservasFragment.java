@@ -34,7 +34,6 @@ public class MisReservasFragment extends Fragment {
     private RecyclerView recyclerViewReservas;
     private ReservaAdapter reservaAdapter;
     private ArrayList<Reserva> listaReservas;
-    private String idUsuario;
 
     public MisReservasFragment() {
         // Required empty public constructor
@@ -93,7 +92,6 @@ public class MisReservasFragment extends Fragment {
                 listaReservas.addAll(reservas);
                 reservaAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void onError(Exception e) {
                 Toast.makeText(getActivity(),"Error al obtener tus reservas",Toast.LENGTH_LONG).show();

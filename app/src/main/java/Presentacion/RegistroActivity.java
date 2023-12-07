@@ -24,7 +24,6 @@ public class RegistroActivity extends AppCompatActivity {
 
     private EditText et_nombre, et_ape1, et_ape2, et_fechNac, et_correo, et_passw, et_passw2;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,10 +64,7 @@ public class RegistroActivity extends AppCompatActivity {
 
             u.existe(new UsuarioDB.Callback() {
                 @Override
-                public void success(Usuario u) {
-
-                }
-
+                public void success(Usuario u) {}
                 @Override
                 public void onCallback(boolean exists) {
                     if (!exists) {
@@ -87,11 +83,8 @@ public class RegistroActivity extends AppCompatActivity {
                         Toast.makeText(RegistroActivity.this, "El usuario ya existe", Toast.LENGTH_LONG).show();
                     }
                 }
-
                 @Override
-                public void onError(Exception e) {
-
-                }
+                public void onError(Exception e) {}
             });
         }
     }

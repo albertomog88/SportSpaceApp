@@ -64,9 +64,6 @@ public class PerfilFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
-
     }
 
     @Override
@@ -78,8 +75,6 @@ public class PerfilFragment extends Fragment {
         FirebaseUser usuarioActual = FirebaseAuth.getInstance().getCurrentUser();
         mAuth=FirebaseAuth.getInstance();
         mail = rootView.findViewById(R.id.mailUsu);
-
-
         mail.setText("Email: "+usuarioActual.getEmail());
 
         Usuario u = new Usuario();
@@ -92,16 +87,10 @@ public class PerfilFragment extends Fragment {
                 fechaNac = rootView.findViewById(R.id.fechNacUsu);
                 fechaNac.setText(("Fecha de Nacimiento: "+ u.getFecha()));
             }
-
             @Override
-            public void onCallback(boolean exists) {
-
-            }
-
+            public void onCallback(boolean exists) {}
             @Override
-            public void onError(Exception e) {
-
-            }
+            public void onError(Exception e) {}
         });
 
         cierreSesion = rootView.findViewById(R.id.cierreSesion);

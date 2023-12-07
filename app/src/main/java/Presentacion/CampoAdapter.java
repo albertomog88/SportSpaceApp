@@ -56,12 +56,9 @@ public class CampoAdapter extends RecyclerView.Adapter<CampoAdapter.CampoViewHol
 
     public class CampoViewHolder extends RecyclerView.ViewHolder {
         TextView textViewNombre;
-        TextView textViewDeporte;
-
         public CampoViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewNombre = itemView.findViewById(R.id.nombreCampo);
-            //textViewDeporte = itemView.findViewById(R.id.deporteCampo);
         }
     }
 }

@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.Toast;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import java.util.ArrayList;
@@ -96,7 +98,7 @@ public class ReservasFragment extends Fragment {
 
                                 @Override
                                 public void onError(Exception e) {
-                                    // Maneja errores aquí
+                                    Toast.makeText(getActivity(),"Error al obtener la lista de los centros",Toast.LENGTH_LONG).show();
                                 }
                             });
                         } else {
@@ -125,6 +127,15 @@ public class ReservasFragment extends Fragment {
                     MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
         SearchView searchView = rootView.findViewById(R.id.search_view);
+
+        //Permitir pulsar fuera del icono de la lupa
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setIconified(false);
+            }
+        });
+
         // Configurar SearchView
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

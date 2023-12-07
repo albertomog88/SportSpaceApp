@@ -3,17 +3,14 @@ package Presentacion;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
-
 import Integracion.CampoDB;
 import Negocio.Campo;
-import Negocio.Centro;
 import Negocio.Horario;
 import es.ucm.fdi.sportspaceapp.R;
 
@@ -45,23 +42,17 @@ public class CentroActivity extends AppCompatActivity {
         tituloCentro.setText(nombreCentro);
 
         campo.obtenerCampos(camposID, new CampoDB.Callback() {
-
             @Override
-            public void success(List<Horario> listaHorarios) {
-
-            }
-
+            public void success(List<Horario> listaHorarios) {}
             @Override
             public void onSuccess(ArrayList<Campo> campos) {
                 listaCampos.clear();
                 listaCampos.addAll(campos);
                 campoAdapter.notifyDataSetChanged();
             }
-
-
             @Override
             public void onError(Exception e) {
-                // Maneja errores aquí
+                Toast.makeText(CentroActivity.this,"Ha habido un error al obtener la lista de los campos",Toast.LENGTH_LONG).show();
             }
         });
     }
