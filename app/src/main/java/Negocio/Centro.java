@@ -1,14 +1,10 @@
 package Negocio;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import Integracion.CentroDB;
-import Integracion.UsuarioDB;
 
 public class Centro {
     private String  nombre;
-    private String  localizacion;
     private double  latitud;
     private double  longitud;
     private double distancia;
@@ -19,9 +15,8 @@ public class Centro {
     public Centro(){
         cDB = new CentroDB();
     }
-    public Centro(String nombre, String localizacion, ArrayList<String> idCampos, double latitud, double longitud) {
+    public Centro(String nombre, ArrayList<String> idCampos, double latitud, double longitud) {
         this.nombre = nombre;
-        this.localizacion = localizacion;
         this.idCampos = idCampos;
         this.cDB = new CentroDB();
         this.latitud = latitud;
@@ -37,14 +32,6 @@ public class Centro {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getLocalizacion() {
-        return localizacion;
-    }
-
-    public void setLocalizacion(String localizacion) {
-        this.localizacion = localizacion;
     }
 
     public ArrayList<String> getIdCampos() {

@@ -1,16 +1,19 @@
 package Presentacion;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
+import Integracion.ReservaBD;
 import Negocio.Reserva;
 import es.ucm.fdi.sportspaceapp.R;
 
@@ -55,8 +58,19 @@ public class VerDetallesReservaActivity extends AppCompatActivity {
                 String idUsuario = usuarioActual.getEmail();
                 String idCampo = intent.getStringExtra("idCampo");
                 String hora = intent.getStringExtra("hora");
-                reserva.eliminarReserva(idUsuario, idCampo, fecha, hora);
+                reserva.eliminarReserva(idUsuario, idCampo, fecha, hora, new ReservaBD.Callback() {
+                    @Override
+                    public void onSuccess(ArrayList<Reserva> reservas) {
+                        Toast.makeText(VerDetallesReservaActivity.this,"Se ha eliminado correctamente tu reserva",Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Toast.makeText(VerDetallesReservaActivity.this,"Error al eliminar tu reserva",Toast.LENGTH_LONG).show();
+                    }
+                });
                 finish();
+                startActivity(new Intent(VerDetallesReservaActivity.this, MainActivity.class));
             }
         });
     }

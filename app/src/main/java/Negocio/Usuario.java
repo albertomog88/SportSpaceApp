@@ -1,6 +1,5 @@
 package Negocio;
 
-import Integracion.ReservaBD;
 import Integracion.UsuarioDB;
 
 public class Usuario {

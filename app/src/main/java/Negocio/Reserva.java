@@ -27,8 +27,8 @@ public class Reserva {
         rBD.obtenerReservas(idUsuario, callback);
     }
 
-    public void eliminarReserva(String idUsuario, String idCampo, String fecha, String hora){
-        rBD.eliminarReserva(idUsuario, idCampo, fecha, hora);
+    public void eliminarReserva(String idUsuario, String idCampo, String fecha, String hora, ReservaBD.Callback callback){
+        rBD.eliminarReserva(idUsuario, idCampo, fecha, hora, callback);
     }
 
     public String getFecha() {

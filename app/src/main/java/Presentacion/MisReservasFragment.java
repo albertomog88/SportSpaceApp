@@ -1,23 +1,18 @@
 package Presentacion;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import java.util.ArrayList;
-
-import Integracion.CentroDB;
 import Integracion.ReservaBD;
-import Negocio.Centro;
 import Negocio.Reserva;
 import es.ucm.fdi.sportspaceapp.R;
 
@@ -101,7 +96,7 @@ public class MisReservasFragment extends Fragment {
 
             @Override
             public void onError(Exception e) {
-                // Maneja errores aquí
+                Toast.makeText(getActivity(),"Error al obtener tus reservas",Toast.LENGTH_LONG).show();
             }
         });
 

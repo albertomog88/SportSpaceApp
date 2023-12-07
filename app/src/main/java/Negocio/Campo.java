@@ -3,7 +3,6 @@ package Negocio;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import Integracion.CampoDB;
 
 public class Campo {

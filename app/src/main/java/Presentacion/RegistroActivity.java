@@ -1,7 +1,6 @@
 package Presentacion;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,14 +12,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 import Integracion.UsuarioDB;
 import Negocio.Usuario;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
-
 import es.ucm.fdi.sportspaceapp.R;
 
 public class RegistroActivity extends AppCompatActivity {

@@ -3,7 +3,6 @@ package Presentacion;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -14,13 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-
 import java.util.ArrayList;
-import java.util.concurrent.Executor;
-
 import Integracion.CentroDB;
 import Negocio.Centro;
 import es.ucm.fdi.sportspaceapp.R;

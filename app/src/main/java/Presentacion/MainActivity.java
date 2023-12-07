@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import Negocio.Reserva;
 import es.ucm.fdi.sportspaceapp.R;
 
 public class MainActivity extends AppCompatActivity{
@@ -26,8 +24,6 @@ public class MainActivity extends AppCompatActivity{
                     selectedFragment = new ReservasFragment();
                 } else if (itemId == R.id.nav_reservas) {
                     selectedFragment = new MisReservasFragment();
-                } else if (itemId == R.id.nav_equipos) {
-                    selectedFragment = new ReservasFragment();
                 } else if (itemId == R.id.nav_perfil) {
                     selectedFragment = new PerfilFragment();
                 }

@@ -1,17 +1,11 @@
 package Integracion;
 
-import android.util.Log;
-
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import Negocio.Campo;
-import Negocio.Horario;
 import Negocio.Reserva;
 
 public class ReservaBD {
@@ -77,7 +71,7 @@ public class ReservaBD {
 
 
 
-    public void eliminarReserva(String idUsuario, String idCampo, String fecha, String hora) {
+    public void eliminarReserva(String idUsuario, String idCampo, String fecha, String hora, Callback callback) {
 
         // Buscar y eliminar el documento de reserva
         SingletonDataBase.getInstance().getDB().collection("Reservas")
@@ -107,10 +101,10 @@ public class ReservaBD {
                                             }
                                         }
                                     });
-                                    // Manejar éxito, por ejemplo, mostrar un mensaje al usuario
+                                    callback.onSuccess(null);
                                 })
                                 .addOnFailureListener(e -> {
-                                    // Manejar error al eliminar la reserva
+                                    callback.onError(e);
                                 });
                     }
                 })

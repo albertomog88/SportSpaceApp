@@ -1,23 +1,15 @@
 package Integracion;
 
 import android.location.Location;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-
 import Negocio.Centro;
 
 public class CentroDB {
     private String myCol = "Centros";
     private String myNombre = "nombre";
-    private String myLocalizacion = "localizacion";
     private String myListaId = "lista";
     private String myLatitud = "latitud";
     private String myLongitud = "longitud";
@@ -39,9 +31,7 @@ public class CentroDB {
                             double longitud = numLongitud != null ? numLongitud.doubleValue() : 0.0;
                             // Suponiendo que idCampos y localizacion son otros atributos que necesitas
                             ArrayList<String> idCampos = (ArrayList<String>) document.get("lista");
-                            String localizacion = document.getString("localizacion");
-
-                            Centro centro = new Centro(nombre, localizacion, idCampos, latitud, longitud);
+                            Centro centro = new Centro(nombre, idCampos, latitud, longitud);
 
                             // Calcular y establecer la distancia
                             double distancia = calcularDistancia(userLat, userLng, latitud, longitud);
