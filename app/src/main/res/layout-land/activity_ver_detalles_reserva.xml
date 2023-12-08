@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="16dp"
+    android:background="@drawable/fondo_gris"
+    tools:context="Presentacion.VerDetallesReservaActivity">
+
+<TextView
+    android:id="@+id/textViewNombreCentroDetalles"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="30sp"
+    android:text="Nombre del Centro"
+    android:fontFamily="@font/audiowide"
+    android:textColor="@color/lightBlue"
+    android:layout_marginTop="20dp" /> <!-- Margen superior para separar del borde superior -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewNombre_Campo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amiko_bold"
+            android:text="Nombre Campo"
+            android:textColor="@color/lightBlue"
+            android:textSize="20sp" />
+
+        <TextView
+        android:id="@+id/textViewFechaDetalles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fecha de la Reserva"
+        android:fontFamily="@font/amiko_bold"
+        android:textColor="@color/lightBlue"
+            android:textSize="20sp"
+         />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCancelarReserva"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/amiko_bold"
+        android:textSize="20dp"
+        android:textColor="@color/buttonsTextColor"
+        app:backgroundTint="@color/ambar"
+        android:text="Cancelar reserva" /> <!-- Margen para separar del TextView anterior -->
+
+    </LinearLayout>
