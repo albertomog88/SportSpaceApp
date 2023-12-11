@@ -100,7 +100,7 @@ public class PerfilFragment extends Fragment {
                 //OnCLick Stuff
                 Log.d("Cierre de sesion", "Cerrando Sesion");
                 mAuth.signOut();
-
+                getActivity().finish();
                 startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
