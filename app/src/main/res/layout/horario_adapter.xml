@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:text="hora"
         android:textSize="20dp"
+        android:textColor="@color/lightBlue"
         android:layout_height="wrap_content">
     </TextView>
 
