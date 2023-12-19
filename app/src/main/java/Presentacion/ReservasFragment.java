@@ -14,32 +14,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import java.util.ArrayList;
 import Integracion.CentroDB;
 import Negocio.Centro;
 import es.ucm.fdi.sportspaceapp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ReservasFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ReservasFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // Variables y constantes
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    private Long longitud, latitud;
-
     private RecyclerView recyclerViewCentros;
     private Centro centro;
     private CentroAdapter centroAdapter;
@@ -51,15 +39,6 @@ public class ReservasFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Reservas.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ReservasFragment newInstance(String param1, String param2) {
         ReservasFragment fragment = new ReservasFragment();
         Bundle args = new Bundle();
@@ -72,71 +51,56 @@ public class ReservasFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Inicializar FusedLocationProviderClient
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        centro = new Centro();
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.getContext());
     }
+
     private void obtenerUbicacionYCentros() {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            fusedLocationClient.getLastLocation()
-                    .addOnSuccessListener(getActivity(), location -> {
-                        if (location != null) {
-                            double latitud = location.getLatitude();
-                            double longitud = location.getLongitude();
+            LocationRequest locationRequest = LocationRequest.create();
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-                            // Ahora llama a obtenerCentros
-                            centro.obtenerCentros(latitud, longitud, new CentroDB.CentroCallback() {
+            fusedLocationClient.getCurrentLocation(locationRequest.getPriority(), null)
+                    .addOnSuccessListener(location -> {
+                        if (location != null) {
+                            centro.obtenerCentros(location.getLatitude(), location.getLongitude(), new CentroDB.CentroCallback() {
                                 @Override
                                 public void onCentrosObtenidos(ArrayList<Centro> centros) {
-                                    // Actualiza la lista de centros y notifica al adaptador
                                     centroAdapter.setListaCentros(centros);
                                     centroAdapter.notifyDataSetChanged();
                                 }
 
                                 @Override
                                 public void onError(Exception e) {
-                                    Toast.makeText(getActivity(),"Error al obtener la lista de los centros",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), "Error al obtener la lista de los centros", Toast.LENGTH_LONG).show();
                                 }
                             });
                         } else {
-                            // Manejar caso donde location == null
+                            Toast.makeText(getActivity(), "No se pudo obtener la ubicación", Toast.LENGTH_LONG).show();
                         }
                     })
-                    .addOnFailureListener(getActivity(), e -> {
-                        // Manejar fallo al obtener la ubicación
-                    });
+                    .addOnFailureListener(e -> Toast.makeText(getActivity(), "Fallo al obtener la ubicación: " + e.getMessage(), Toast.LENGTH_LONG).show());
         } else {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_reservas, container, false);
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-        }
-        SearchView searchView = rootView.findViewById(R.id.search_view);
 
-        //Permitir pulsar fuera del icono de la lupa
+        // Configuración del SearchView
+        SearchView searchView = rootView.findViewById(R.id.search_view);
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 searchView.setIconified(false);
             }
         });
-
-        // Configurar SearchView
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -149,35 +113,36 @@ public class ReservasFragment extends Fragment {
                 return true;
             }
         });
-        // Configurar el RecyclerView
+
+        // Configuración del RecyclerView
         recyclerViewCentros = rootView.findViewById(R.id.recyclerViewCentros);
         recyclerViewCentros.setLayoutManager(new LinearLayoutManager(getActivity()));
-        // Inicializar el adaptador con una lista vacía
         listaCentros = new ArrayList<>();
         centroAdapter = new CentroAdapter(listaCentros, getContext());
         recyclerViewCentros.setAdapter(centroAdapter);
 
-        // Llama a la función obtenerCentros y actualiza el adaptador cuando se complete la consulta
-        centro = new Centro();
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.getContext());
+        // Verificar y solicitar permisos, luego obtener ubicación y centros
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        } else {
+            obtenerUbicacionYCentros();
+        }
 
-        // Asegúrate de que tienes los permisos antes de llamar a obtenerUbicacionYCentros
-        obtenerUbicacionYCentros();
+
 
         return rootView;
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // El permiso fue concedido, puedes hacer la operación que requiere el permiso
                 obtenerUbicacionYCentros();
             } else {
-                // El permiso fue denegado, maneja adecuadamente la negación de este permiso
+                Toast.makeText(getActivity(), "Permiso de ubicación denegado", Toast.LENGTH_LONG).show();
             }
         }
     }
-
 }
